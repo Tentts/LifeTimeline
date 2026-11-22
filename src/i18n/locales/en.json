@@ -43,8 +43,22 @@
   "date": {
     "year": "Year",
     "month": "Month",
-    "day": "Day",
-    "unknown": "Not sure",
+    "select": "Choose a date",
+    "pickerLabel": "Calendar",
+    "precision": "How exact is this date?",
+    "precisions": {
+      "day": "Exact day",
+      "month": "Month only",
+      "year": "Year only"
+    },
+    "precisionHints": {
+      "month": "Not sure of the day? The month is enough.",
+      "year": "Not sure of the month? The year is enough."
+    },
+    "prevMonth": "Previous month",
+    "nextMonth": "Next month",
+    "today": "Today",
+    "done": "Done",
     "approx": "Approximate",
     "approxLabel": "c. {{date}}",
     "errors": {

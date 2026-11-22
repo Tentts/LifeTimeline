@@ -1,6 +1,7 @@
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from './App';
+import { enterYear } from './test/dates';
 import i18n from './i18n';
 import { DISCLAIMER_STORAGE_KEY } from './components/DisclaimerBanner';
 import { serializeTimeline } from './format/tl';
@@ -11,7 +12,7 @@ async function createTimelineThroughUi(user: ReturnType<typeof userEvent.setup>)
   await user.click(screen.getByRole('button', { name: 'New timeline' }));
   const dialog = screen.getByRole('dialog', { name: 'New timeline' });
   await user.type(within(dialog).getByLabelText(/Title/), 'My life');
-  await user.type(within(dialog).getByLabelText('Year'), '1990');
+  await enterYear(user, dialog, '1990');
   return dialog;
 }
 
@@ -71,9 +72,7 @@ describe('App', () => {
     await user.click(await screen.findByRole('button', { name: '+ Add event' }));
     const eventDialog = screen.getByRole('dialog', { name: 'Add an event' });
     await user.type(within(eventDialog).getByLabelText(/What happened/), 'Started school');
-    const year = within(eventDialog).getByLabelText('Year');
-    await user.clear(year);
-    await user.type(year, '1996');
+    await enterYear(user, eventDialog, '1996');
     await user.click(within(eventDialog).getByLabelText('This was a turning point'));
     await user.click(screen.getByRole('button', { name: 'Save' }));
 

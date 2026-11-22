@@ -165,6 +165,107 @@
     "emptyShort": "Add your first event to start.",
     "tapHint": "Tap a point on the line to see that event."
   },
+  "wizard": {
+    "title": "Guided walkthrough",
+    "startButton": "Guided walkthrough",
+    "continueButton": "Continue walkthrough",
+    "progress": "Step {{current}} of {{total}}",
+    "start": "Start",
+    "next": "Next",
+    "back": "Back",
+    "done": "Finish",
+    "notNow": "Not now",
+    "takeBreak": "Take a break",
+    "gentle": "If a memory feels too heavy, it’s okay to leave it out, or to add just a short title. You can always come back to it later, or talk it through with someone you trust.",
+    "gentleShort": "Add only what feels right. Skipping a period is completely fine.",
+    "promptsIntro": "Some questions that may help memories come back:",
+    "addFromStage": "Add an event from this time",
+    "onTimeline": "On your timeline from this time",
+    "nothingYet": "Nothing from this time yet.",
+    "stageRange": "Ages {{from}}–{{to}} · {{startYear}}–{{endYear}}",
+    "stageRangeCurrent": "Age {{from}} to today · {{startYear}}–today",
+    "cta": {
+      "heading": "Not sure where to start?",
+      "body": "The guided walkthrough takes you through your life one period at a time, with a few questions to help memories come back."
+    },
+    "intro": {
+      "heading": "Let’s walk through your life together",
+      "body": "We’ll go one period at a time, from your earliest years to today. Each step has a few questions to help memories come back. Add as many or as few events as you like: everything you add appears on your lifeline straight away.",
+      "pace": "There’s no right or wrong answer and no need to finish in one go. You can skip any step, go back, or take a break and continue later."
+    },
+    "stages": {
+      "earlyChildhood": {
+        "title": "Early childhood",
+        "p1": "What is your earliest memory?",
+        "p2": "Who took care of you? Where did you live?",
+        "p3": "Was there a move, a new brother or sister, or a loss in the family?"
+      },
+      "childhood": {
+        "title": "Childhood",
+        "p1": "What do you remember about starting school?",
+        "p2": "Who were your friends, and what did you love doing?",
+        "p3": "Were there moments when you felt especially proud, or especially scared or alone?"
+      },
+      "adolescence": {
+        "title": "Adolescence",
+        "p1": "Which people or experiences shaped who you were becoming?",
+        "p2": "Think of firsts: a first love, a first job, a first big decision.",
+        "p3": "Were there conflicts, losses or big changes at home or at school?"
+      },
+      "youngAdulthood": {
+        "title": "Young adulthood",
+        "p1": "Did you study, start working, or move somewhere new?",
+        "p2": "Which important relationships began or ended?",
+        "p3": "What were you hoping your life would become?"
+      },
+      "adulthood": {
+        "title": "Adulthood",
+        "p1": "What were the big commitments: work, a partner, children, a home?",
+        "p2": "What challenges tested you, and what helped you through them?",
+        "p3": "When did you feel most like yourself?"
+      },
+      "midlife": {
+        "title": "Midlife",
+        "p1": "What changed in your work, your family or your health?",
+        "p2": "Were there losses, or new beginnings?",
+        "p3": "What have you come to value more over the years?"
+      },
+      "laterLife": {
+        "title": "Later life",
+        "p1": "What has this stage of life brought you?",
+        "p2": "Which people have been most important to you?",
+        "p3": "Which moments from these years would you like to remember?"
+      }
+    },
+    "keyMoments": {
+      "heading": "Key moments",
+      "intro": "Looking back over your whole life so far, a few moments often stand out. Add them if they’re not on your timeline yet.",
+      "existing": "Already on your timeline: {{titles}}",
+      "high": {
+        "title": "A high point",
+        "prompt": "A moment of great joy, pride or peace. What happened, and who was there?",
+        "add": "Add a high point"
+      },
+      "low": {
+        "title": "A low point",
+        "prompt": "One of the hardest times. Only add it if you feel ready; a short title is enough.",
+        "add": "Add a low point"
+      },
+      "turning": {
+        "title": "A turning point",
+        "prompt": "A moment when something in you or in your life changed direction.",
+        "add": "Add a turning point"
+      }
+    },
+    "finish": {
+      "heading": "You’ve walked through your whole timeline",
+      "added_one": "You added {{count}} event during this walkthrough.",
+      "added_other": "You added {{count}} events during this walkthrough.",
+      "reflect": "Take a moment to look at your lifeline. Which turning points stand out? What helped you through the low points? Are there patterns you hadn’t noticed before?",
+      "backup": "Your timeline is saved only in this browser. Export a .tl file to keep a backup.",
+      "export": "Export a backup"
+    }
+  },
   "export": {
     "title": "Export timeline",
     "localOnly": "Files are created on your device and downloaded directly. Nothing is uploaded.",

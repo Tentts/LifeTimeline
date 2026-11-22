@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { createTimeline, newId, touch } from '../model/factory';
 import type { FuzzyDate, Timeline } from '../model/schema';
 import * as db from '../storage/db';
+import { saveProgress } from '../wizard/stages';
 
 export type ImportConflict = { incoming: Timeline };
 
@@ -80,6 +81,7 @@ export function TimelinesProvider({ children }: { children: ReactNode }) {
       },
       async remove(id) {
         await db.deleteTimeline(id);
+        saveProgress(id, null); // leave nothing behind in this browser
         setCurrent((c) => (c?.id === id ? null : c));
         await refresh();
       },

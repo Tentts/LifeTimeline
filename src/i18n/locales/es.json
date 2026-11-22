@@ -9,6 +9,11 @@
   "language": {
     "label": "Idioma"
   },
+  "theme": {
+    "dark": "Modo oscuro",
+    "switchToDark": "Cambiar al tema oscuro",
+    "switchToLight": "Cambiar al tema claro"
+  },
   "common": {
     "cancel": "Cancelar",
     "close": "Cerrar",

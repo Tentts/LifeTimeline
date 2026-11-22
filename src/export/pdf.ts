@@ -9,7 +9,8 @@ import type { Timeline } from '../model/schema';
 import { renderGraphSvg } from './graphSvg';
 
 const PAGE = { width: 297, height: 210, margin: 14 }; // A4 landscape, mm
-const COLORS = { text: '#2b2b2b', muted: '#6b6b6b', primary: '#2f5d62', rule: '#e6e1d8' };
+// Light-theme colours (see theme.css): blue headings, pink accents.
+const COLORS = { text: '#1e2233', muted: '#5b6075', primary: '#2f5fc4', rule: '#e8e5f0' };
 
 /** Builds the PDF in the browser: page 1 is the lifeline graph, then the chronological event list. */
 export async function buildPdf(timeline: Timeline, t: TFunction, locale: string): Promise<Blob> {

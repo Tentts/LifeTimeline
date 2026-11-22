@@ -1,9 +1,43 @@
 import { useTranslation } from 'react-i18next';
 import type { EventSymbol, Timeline } from '../model/schema';
-import { computeLayout, truncate, type PlacedEvent } from './layout';
-import type { GraphPalette } from './palette';
+import { computeLayout, truncate, type GraphLayout, type PlacedEvent } from './layout';
+import { mixHex, type GraphPalette } from './palette';
 
 const FONT = 'Helvetica, Arial, sans-serif';
+const SUBDIVISIONS = 12;
+
+/** The lifeline as short solid segments, coloured by height (blue at +5 → pink at -5). */
+function SegmentedLine({ layout, palette }: { layout: GraphLayout; palette: GraphPalette }) {
+  const points = [layout.birth, ...layout.events];
+  const { top, bottom } = layout.plot;
+  const segments = [];
+  for (let i = 1; i < points.length; i++) {
+    const a = points[i - 1];
+    const b = points[i];
+    for (let s = 0; s < SUBDIVISIONS; s++) {
+      const t0 = s / SUBDIVISIONS;
+      const t1 = (s + 1) / SUBDIVISIONS;
+      const y0 = a.y + (b.y - a.y) * t0;
+      const y1 = a.y + (b.y - a.y) * t1;
+      const color = mixHex(
+        palette.lineHigh,
+        palette.lineLow,
+        ((y0 + y1) / 2 - top) / (bottom - top),
+      );
+      segments.push(
+        <line
+          key={`${i}-${s}`}
+          x1={a.x + (b.x - a.x) * t0}
+          y1={y0}
+          x2={a.x + (b.x - a.x) * t1}
+          y2={y1}
+          style={{ stroke: color, strokeWidth: 2.5, strokeLinecap: 'round' }}
+        />,
+      );
+    }
+  }
+  return <g>{segments}</g>;
+}
 
 interface Props {
   timeline: Timeline;
@@ -12,16 +46,26 @@ interface Props {
   fixedSize?: boolean;
   now?: Date;
   onSelectEvent?: (id: string) => void;
+  /** Keeps SVG ids unique when the on-screen and export graphs exist at the same time. */
+  idPrefix?: string;
 }
 
 /**
  * The lifeline: time on the x axis, how good or bad it felt (-5…+5) on the y axis.
  * Uses only inline colours so it can be serialised for PNG/PDF export.
  */
-export function LifelineGraph({ timeline, palette: p, fixedSize, now, onSelectEvent }: Props) {
+export function LifelineGraph({
+  timeline,
+  palette: p,
+  fixedSize,
+  now,
+  onSelectEvent,
+  idPrefix = 'lifeline',
+}: Props) {
   const { t } = useTranslation();
   const layout = computeLayout(timeline, { now });
   const { width, height, plot } = layout;
+  const gradientId = `${idPrefix}-line-gradient`;
 
   const colorFor = (valence: number) =>
     valence > 0 ? p.positive : valence < 0 ? p.negative : p.neutral;
@@ -37,6 +81,21 @@ export function LifelineGraph({ timeline, palette: p, fixedSize, now, onSelectEv
       fontFamily={FONT}
       className="lifeline-graph"
     >
+      <defs>
+        {/* Blue at the highs, pink at the lows. userSpaceOnUse so flat lines still render.
+            Only used in 'svg' line mode; harmless otherwise. */}
+        <linearGradient
+          id={gradientId}
+          gradientUnits="userSpaceOnUse"
+          x1={0}
+          y1={plot.top}
+          x2={0}
+          y2={plot.bottom}
+        >
+          <stop offset="0" stopColor={p.lineHigh} style={{ stopColor: p.lineHigh }} />
+          <stop offset="1" stopColor={p.lineLow} style={{ stopColor: p.lineLow }} />
+        </linearGradient>
+      </defs>
       <rect x={0} y={0} width={width} height={height} style={{ fill: p.background }} />
 
       {/* Grid and axes */}
@@ -134,15 +193,20 @@ export function LifelineGraph({ timeline, palette: p, fixedSize, now, onSelectEv
         ))}
 
       {/* The lifeline itself */}
-      <path
-        d={layout.path}
-        style={{ fill: 'none', stroke: p.line, strokeWidth: 2.5, strokeLinejoin: 'round' }}
-      />
+      {p.lineMode === 'segments' ? (
+        <SegmentedLine layout={layout} palette={p} />
+      ) : (
+        <path
+          d={layout.path}
+          stroke={`url(#${gradientId})`}
+          style={{ fill: 'none', strokeWidth: 2.5, strokeLinejoin: 'round' }}
+        />
+      )}
       <circle
         cx={layout.birth.x}
         cy={layout.birth.y}
         r={4}
-        style={{ fill: p.background, stroke: p.line, strokeWidth: 2 }}
+        style={{ fill: p.background, stroke: p.lineHigh, strokeWidth: 2 }}
       />
 
       {layout.events.map((placed) => (

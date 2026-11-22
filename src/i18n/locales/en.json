@@ -9,6 +9,11 @@
   "language": {
     "label": "Language"
   },
+  "theme": {
+    "dark": "Dark mode",
+    "switchToDark": "Switch to the dark theme",
+    "switchToLight": "Switch to the light theme"
+  },
   "common": {
     "cancel": "Cancel",
     "close": "Close",

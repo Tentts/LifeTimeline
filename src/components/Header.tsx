@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { ThemeSwitch } from './ThemeSwitch';
 
 export function Header() {
   const { t } = useTranslation();
@@ -10,7 +11,10 @@ export function Header() {
         <h1 className="app-title">{t('app.title')}</h1>
         <p className="app-tagline">{t('app.tagline')}</p>
       </div>
-      <LanguageSwitcher />
+      <div className="header-controls">
+        <ThemeSwitch />
+        <LanguageSwitcher />
+      </div>
     </header>
   );
 }

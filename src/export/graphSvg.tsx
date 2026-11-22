@@ -9,7 +9,13 @@ import type { Timeline } from '../model/schema';
 export function renderGraphSvg(timeline: Timeline, now?: Date): string {
   return renderToStaticMarkup(
     <I18nextProvider i18n={i18n}>
-      <LifelineGraph timeline={timeline} palette={EXPORT_PALETTE} fixedSize now={now} />
+      <LifelineGraph
+        timeline={timeline}
+        palette={EXPORT_PALETTE}
+        fixedSize
+        now={now}
+        idPrefix="export"
+      />
     </I18nextProvider>,
   );
 }

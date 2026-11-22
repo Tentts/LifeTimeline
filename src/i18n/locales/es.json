@@ -209,6 +209,71 @@
     "deleteTitle": "¿Eliminar este capítulo?",
     "deleteBody": "«{{title}}» se eliminará. Los acontecimientos de esa época seguirán en tu línea de vida."
   },
+  "example": {
+    "badge": "Ejemplo",
+    "title": "La vida de Alex (ejemplo)",
+    "name": "Alex",
+    "see": "Ver un ejemplo",
+    "previewHeading": "Cómo es una Línea de Vida",
+    "previewBody": "Esta es la línea de vida de Alex, una persona ficticia. Los picos son los buenos momentos, los valles los difíciles y las bandas de color son los capítulos de su vida.",
+    "explore": "Explorar el ejemplo",
+    "back": "Volver",
+    "notice": "Alex es una persona ficticia. Este ejemplo viene incluido en la aplicación y no se guarda nada a menos que hagas una copia.",
+    "createOwn": "Crear mi línea de vida",
+    "copy": "Hacer una copia editable",
+    "chapters": {
+      "growing": "Crecer",
+      "university": "Universidad",
+      "career": "Primera carrera profesional",
+      "over": "Empezar de nuevo"
+    },
+    "events": {
+      "sister": {
+        "title": "Nació mi hermana pequeña",
+        "description": "De repente había alguien a quien cuidar y con quien jugar."
+      },
+      "school": {
+        "title": "Empecé el colegio",
+        "description": "Al principio con nervios; la primera semana ya tenía un mejor amigo."
+      },
+      "move": {
+        "title": "Mi familia se mudó a otra ciudad",
+        "description": "Dejar atrás a mis amistades fue duro y tardé mucho en sentirme en casa."
+      },
+      "band": {
+        "title": "Entré en un grupo de música",
+        "description": "La música se convirtió en una forma de conocer gente y de ser yo."
+      },
+      "grandfather": {
+        "title": "Falleció mi abuelo",
+        "description": "Me enseñó a pescar y siempre me escuchaba. Todavía lo echo de menos."
+      },
+      "university": {
+        "title": "Me fui de casa a la universidad",
+        "description": "La primera vez que tomaba mis propias decisiones. Todo se abrió."
+      },
+      "job": {
+        "title": "Primer trabajo a tiempo completo",
+        "description": "Orgullo por la independencia, aunque las jornadas fueran largas."
+      },
+      "burnout": {
+        "title": "Agotamiento y baja laboral",
+        "description": "Tuve que parar. Pedir ayuda fue lo más difícil y lo mejor que hice."
+      },
+      "career": {
+        "title": "Cambié de profesión",
+        "description": "Me formé como docente y encontré un trabajo con sentido."
+      },
+      "home": {
+        "title": "Me fui a vivir con mi pareja",
+        "description": "Un lugar que por fin se siente como un hogar."
+      }
+    },
+    "answers": {
+      "themes": "Cada vez que algo terminaba, acababa encontrando algo que encajaba mejor conmigo.",
+      "strengths": "Mi hermana, la música y aprender a pedir ayuda."
+    }
+  },
   "support": {
     "footerLink": "¿Necesitas apoyo?",
     "title": "Buscar apoyo",

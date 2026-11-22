@@ -14,7 +14,8 @@ const SYMBOL_EMOJI = {
 
 interface Props {
   timeline: Timeline;
-  onEdit: (id: string) => void;
+  /** Omit for a read-only list. */
+  onEdit?: (id: string) => void;
 }
 
 /** Chronological list: the accessible, text-only view of the timeline. */
@@ -50,9 +51,13 @@ export function EventList({ timeline, onEdit }: Props) {
             )}
           </div>
           <h3 className="event-title">
-            <button type="button" className="link-button" onClick={() => onEdit(event.id)}>
-              {event.title}
-            </button>
+            {onEdit ? (
+              <button type="button" className="link-button" onClick={() => onEdit(event.id)}>
+                {event.title}
+              </button>
+            ) : (
+              event.title
+            )}
           </h3>
           {event.description && <p className="event-text">{event.description}</p>}
           {event.reflection && (

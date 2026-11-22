@@ -3,6 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import { OpenTlButton } from '../components/OpenTlButton';
 import { TimelineDetailsDialog } from '../components/TimelineDetailsDialog';
+import { ExampleGraph } from '../example/ExampleGraph';
+import { buildExampleTimeline } from '../example/exampleTimeline';
+import { ExampleView } from '../example/ExampleView';
 import { useTimelines } from '../state/TimelinesContext';
 import type { TimelineSummary } from '../storage/db';
 
@@ -10,12 +13,27 @@ export function HomeView() {
   const { t, i18n } = useTranslation();
   const { summaries, loading, create, open, remove } = useTimelines();
   const [creating, setCreating] = useState(false);
+  const [viewingExample, setViewingExample] = useState(false);
   const [deleting, setDeleting] = useState<TimelineSummary | null>(null);
   const formatDate = (iso: string) =>
     new Intl.DateTimeFormat(i18n.resolvedLanguage, {
       dateStyle: 'medium',
       timeStyle: 'short',
     }).format(new Date(iso));
+
+  if (viewingExample) {
+    return (
+      <ExampleView
+        onBack={() => setViewingExample(false)}
+        onCreateOwn={() => {
+          setViewingExample(false);
+          setCreating(true);
+        }}
+      />
+    );
+  }
+
+  const isFirstVisit = !loading && summaries.length === 0;
 
   return (
     <div className="home">
@@ -27,8 +45,27 @@ export function HomeView() {
             {t('home.new')}
           </button>
           <OpenTlButton className="secondary" />
+          {!loading && !isFirstVisit && (
+            <button type="button" className="secondary" onClick={() => setViewingExample(true)}>
+              {t('example.see')}
+            </button>
+          )}
         </div>
       </section>
+
+      {isFirstVisit && (
+        <section className="card example-preview" aria-labelledby="example-preview-heading">
+          <span className="example-badge">{t('example.badge')}</span>
+          <h2 id="example-preview-heading">{t('example.previewHeading')}</h2>
+          <p>{t('example.previewBody')}</p>
+          <ExampleGraph timeline={buildExampleTimeline(t)} />
+          <div className="actions">
+            <button type="button" className="secondary" onClick={() => setViewingExample(true)}>
+              {t('example.explore')}
+            </button>
+          </div>
+        </section>
+      )}
 
       <section className="card">
         <h2>{t('home.savedHeading')}</h2>

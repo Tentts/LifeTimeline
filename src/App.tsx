@@ -4,6 +4,7 @@ import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { TimelinesProvider, useTimelines } from './state/TimelinesContext';
 import { SupportDialog } from './support/SupportDialog';
+import { AboutView } from './views/AboutView';
 import { HomeView } from './views/HomeView';
 import { PrivacyView } from './views/PrivacyView';
 import { TimelineView } from './views/TimelineView';
@@ -18,7 +19,7 @@ export default function App() {
 
 function Shell() {
   const { current } = useTimelines();
-  const [showPrivacy, setShowPrivacy] = useState(false);
+  const [page, setPage] = useState<'privacy' | 'about' | null>(null);
   const [showSupport, setShowSupport] = useState(false);
 
   return (
@@ -26,8 +27,10 @@ function Shell() {
       <Header />
       <DisclaimerBanner />
       <main className="app-main">
-        {showPrivacy ? (
-          <PrivacyView onBack={() => setShowPrivacy(false)} />
+        {page === 'privacy' ? (
+          <PrivacyView onBack={() => setPage(null)} />
+        ) : page === 'about' ? (
+          <AboutView onBack={() => setPage(null)} />
         ) : current ? (
           <TimelineView key={current.id} timeline={current} />
         ) : (
@@ -35,7 +38,8 @@ function Shell() {
         )}
       </main>
       <Footer
-        onShowPrivacy={() => setShowPrivacy(true)}
+        onShowPrivacy={() => setPage('privacy')}
+        onShowAbout={() => setPage('about')}
         onShowSupport={() => setShowSupport(true)}
       />
       {showSupport && <SupportDialog onClose={() => setShowSupport(false)} />}

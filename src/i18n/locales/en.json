@@ -209,6 +209,15 @@
     "deleteTitle": "Delete this chapter?",
     "deleteBody": "“{{title}}” will be removed. The events from that time stay on your timeline."
   },
+  "about": {
+    "back": "Back",
+    "heading": "About Life Timeline",
+    "app": "Life Timeline is a free, open-source tool for mapping the moments that shaped your story. It runs entirely in your browser, with no accounts and no servers.",
+    "creatorHeading": "Who made this",
+    "creator": "Hi, I’m Tentts, a developer who likes building practical software and learning across different fields.",
+    "projects": "My other projects include machine learning for masked face recognition and Android malware detection, autonomous robot navigation with ROS, an IoT system for hospital inventory, and a World of Warcraft addon.",
+    "github": "Tentts on GitHub"
+  },
   "example": {
     "badge": "Example",
     "title": "Alex’s life (example)",
@@ -475,6 +484,7 @@
   "footer": {
     "privacy": "Your data stays in this browser. Nothing is sent to any server.",
     "privacyLink": "Privacy",
+    "aboutLink": "About",
     "source": "Source code"
   }
 }

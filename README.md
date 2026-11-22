@@ -8,13 +8,19 @@ impact.
 
 > ⚠️ This is a self-reflection tool, not a substitute for therapy.
 
-All data stays in your browser. There is no backend; the app is a static site on GitHub Pages.
+**We never store your data.** The app is just a set of tools that runs in your browser. Your
+timelines are kept only in this browser's local storage and in files you export yourself. There is
+no backend; the app is a static site on GitHub Pages.
+
+Export to **PDF**, **PNG** or the app's own **`.tl`** format, and open `.tl` files to continue
+where you left off.
 
 ## Docs
 
 - [Research notes](docs/RESEARCH.md)
 - [Development plan](docs/DEVELOPMENT_PLAN.md)
 - [Translating](docs/TRANSLATING.md)
+- [`.tl` file format](docs/FILE_FORMAT.md)
 
 ## Development
 

@@ -14,8 +14,10 @@ import { SCREEN_PALETTE } from '../graph/palette';
 import { emptyEventDraft, newId, type EventDraft } from '../model/factory';
 import type { LifeEvent, Timeline } from '../model/schema';
 import { useTimelines } from '../state/TimelinesContext';
+import { GuidedWizard } from '../wizard/GuidedWizard';
+import { loadProgress } from '../wizard/stages';
 
-type Editing = { mode: 'create' } | { mode: 'edit'; event: LifeEvent };
+type Editing = { mode: 'create'; initial?: EventDraft } | { mode: 'edit'; event: LifeEvent };
 
 const withoutId = ({ id: _id, ...draft }: LifeEvent): EventDraft => draft;
 
@@ -26,6 +28,8 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
   const [deleting, setDeleting] = useState<LifeEvent | null>(null);
   const [editingDetails, setEditingDetails] = useState(false);
   const [exporting, setExporting] = useState(false);
+  const [guiding, setGuiding] = useState(false);
+  const hasWizardProgress = !guiding && loadProgress(timeline.id) !== null;
   const locale = i18n.resolvedLanguage ?? 'en';
   // Phones get the compact graph; everything wider keeps the desktop graph unchanged.
   const graphRef = useRef<HTMLDivElement>(null);
@@ -79,8 +83,35 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
           <button type="button" className="secondary" onClick={() => setEditingDetails(true)}>
             {t('timeline.editDetails')}
           </button>
+          {!guiding && (
+            <button type="button" className="secondary" onClick={() => setGuiding(true)}>
+              {t(hasWizardProgress ? 'wizard.continueButton' : 'wizard.startButton')}
+            </button>
+          )}
         </div>
       </section>
+
+      {guiding ? (
+        <GuidedWizard
+          timeline={timeline}
+          onAddEvent={(draft) => setEditing({ mode: 'create', initial: draft })}
+          onEditEvent={editEvent}
+          onExport={() => setExporting(true)}
+          onClose={() => setGuiding(false)}
+        />
+      ) : (
+        timeline.events.length === 0 && (
+          <section className="card wizard-cta">
+            <div>
+              <h3>{t('wizard.cta.heading')}</h3>
+              <p>{t('wizard.cta.body')}</p>
+            </div>
+            <button type="button" onClick={() => setGuiding(true)}>
+              {t('wizard.startButton')}
+            </button>
+          </section>
+        )
+      )}
 
       <section className="card">
         <h3 className="visually-hidden">{t('timeline.graphHeading')}</h3>
@@ -105,7 +136,7 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
           initial={
             editing.mode === 'edit'
               ? withoutId(editing.event)
-              : emptyEventDraft({ year: new Date().getFullYear() })
+              : (editing.initial ?? emptyEventDraft({ year: new Date().getFullYear() }))
           }
           onCancel={() => setEditing(null)}
           onSubmit={saveEvent}

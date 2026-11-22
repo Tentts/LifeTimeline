@@ -165,6 +165,107 @@
     "emptyShort": "Añade tu primer acontecimiento para empezar.",
     "tapHint": "Toca un punto de la línea para ver ese acontecimiento."
   },
+  "wizard": {
+    "title": "Recorrido guiado",
+    "startButton": "Recorrido guiado",
+    "continueButton": "Continuar el recorrido",
+    "progress": "Paso {{current}} de {{total}}",
+    "start": "Empezar",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "done": "Terminar",
+    "notNow": "Ahora no",
+    "takeBreak": "Tomar un descanso",
+    "gentle": "Si un recuerdo te resulta demasiado pesado, está bien dejarlo fuera o añadir solo un título breve. Siempre puedes volver a él más adelante o hablarlo con alguien de confianza.",
+    "gentleShort": "Añade solo lo que te parezca bien. Saltarte una etapa está perfectamente bien.",
+    "promptsIntro": "Algunas preguntas que pueden ayudarte a recordar:",
+    "addFromStage": "Añadir un acontecimiento de esta etapa",
+    "onTimeline": "En tu línea de vida de esta etapa",
+    "nothingYet": "Todavía no hay nada de esta etapa.",
+    "stageRange": "De {{from}} a {{to}} años · {{startYear}}–{{endYear}}",
+    "stageRangeCurrent": "De {{from}} años hasta hoy · {{startYear}}–hoy",
+    "cta": {
+      "heading": "¿No sabes por dónde empezar?",
+      "body": "El recorrido guiado te acompaña por tu vida etapa a etapa, con algunas preguntas que te ayudan a recordar."
+    },
+    "intro": {
+      "heading": "Recorramos juntos tu vida",
+      "body": "Iremos etapa a etapa, desde tus primeros años hasta hoy. Cada paso tiene algunas preguntas que te ayudan a recordar. Añade tantos o tan pocos acontecimientos como quieras: todo lo que añadas aparece al momento en tu línea de vida.",
+      "pace": "No hay respuestas correctas ni incorrectas, ni necesidad de terminar de una vez. Puedes saltarte cualquier paso, volver atrás o tomarte un descanso y continuar más tarde."
+    },
+    "stages": {
+      "earlyChildhood": {
+        "title": "Primera infancia",
+        "p1": "¿Cuál es tu primer recuerdo?",
+        "p2": "¿Quién te cuidaba? ¿Dónde vivías?",
+        "p3": "¿Hubo una mudanza, un nuevo hermano o hermana, o una pérdida en la familia?"
+      },
+      "childhood": {
+        "title": "Infancia",
+        "p1": "¿Qué recuerdas de cuando empezaste el colegio?",
+        "p2": "¿Quiénes eran tus amigos y qué te encantaba hacer?",
+        "p3": "¿Hubo momentos en los que te sentiste especialmente orgulloso/a, o especialmente asustado/a o solo/a?"
+      },
+      "adolescence": {
+        "title": "Adolescencia",
+        "p1": "¿Qué personas o experiencias influyeron en quién estabas llegando a ser?",
+        "p2": "Piensa en las primeras veces: un primer amor, un primer trabajo, una primera gran decisión.",
+        "p3": "¿Hubo conflictos, pérdidas o grandes cambios en casa o en el instituto?"
+      },
+      "youngAdulthood": {
+        "title": "Juventud",
+        "p1": "¿Estudiaste, empezaste a trabajar o te mudaste a otro lugar?",
+        "p2": "¿Qué relaciones importantes empezaron o terminaron?",
+        "p3": "¿Qué esperabas que llegara a ser tu vida?"
+      },
+      "adulthood": {
+        "title": "Edad adulta",
+        "p1": "¿Cuáles fueron los grandes compromisos: trabajo, pareja, hijos, un hogar?",
+        "p2": "¿Qué dificultades te pusieron a prueba y qué te ayudó a superarlas?",
+        "p3": "¿Cuándo te sentiste más tú mismo/a?"
+      },
+      "midlife": {
+        "title": "Madurez",
+        "p1": "¿Qué cambió en tu trabajo, tu familia o tu salud?",
+        "p2": "¿Hubo pérdidas o nuevos comienzos?",
+        "p3": "¿Qué has aprendido a valorar más con los años?"
+      },
+      "laterLife": {
+        "title": "Edad avanzada",
+        "p1": "¿Qué te ha traído esta etapa de la vida?",
+        "p2": "¿Qué personas han sido las más importantes para ti?",
+        "p3": "¿Qué momentos de estos años te gustaría recordar?"
+      }
+    },
+    "keyMoments": {
+      "heading": "Momentos clave",
+      "intro": "Mirando tu vida en conjunto, algunos momentos suelen destacar. Añádelos si aún no están en tu línea de vida.",
+      "existing": "Ya en tu línea de vida: {{titles}}",
+      "high": {
+        "title": "Un momento cumbre",
+        "prompt": "Un momento de gran alegría, orgullo o paz. ¿Qué pasó y quién estaba allí?",
+        "add": "Añadir un momento cumbre"
+      },
+      "low": {
+        "title": "Un momento bajo",
+        "prompt": "Una de las épocas más difíciles. Añádelo solo si te sientes preparado/a; basta con un título breve.",
+        "add": "Añadir un momento bajo"
+      },
+      "turning": {
+        "title": "Un punto de inflexión",
+        "prompt": "Un momento en el que algo en ti o en tu vida cambió de rumbo.",
+        "add": "Añadir un punto de inflexión"
+      }
+    },
+    "finish": {
+      "heading": "Has recorrido toda tu línea de vida",
+      "added_one": "Has añadido {{count}} acontecimiento durante este recorrido.",
+      "added_other": "Has añadido {{count}} acontecimientos durante este recorrido.",
+      "reflect": "Tómate un momento para mirar tu línea de vida. ¿Qué puntos de inflexión destacan? ¿Qué te ayudó en los momentos bajos? ¿Hay patrones que no habías visto antes?",
+      "backup": "Tu línea de vida se guarda solo en este navegador. Exporta un archivo .tl para tener una copia de seguridad.",
+      "export": "Exportar una copia de seguridad"
+    }
+  },
   "export": {
     "title": "Exportar línea de vida",
     "localOnly": "Los archivos se crean en tu dispositivo y se descargan directamente. No se sube nada.",

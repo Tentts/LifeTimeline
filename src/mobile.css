@@ -185,6 +185,22 @@
     min-width: 0;
     width: 100%;
   }
+
+  /* ---------- Guided walkthrough ---------- */
+
+  .wizard-nav button {
+    flex: 1 1 auto;
+  }
+
+  .wizard-break {
+    margin-left: 0;
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .wizard-cta button {
+    width: 100%;
+  }
 }
 
 /* ---------- Phone-only components ---------- */

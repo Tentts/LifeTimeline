@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "nativeName": "Español"
+  },
+  "app": {
+    "title": "Línea de Vida",
+    "tagline": "Traza los momentos que dieron forma a tu historia."
+  },
+  "language": {
+    "label": "Idioma"
+  },
+  "disclaimer": {
+    "title": "Una herramienta de autorreflexión, no de terapia",
+    "body": "Revisar recuerdos difíciles puede ser doloroso. Ve a tu propio ritmo, añade solo lo que te resulte cómodo y tómate descansos. Si estás atravesando un trauma o te sientes desbordado/a, busca el apoyo de un profesional de la salud mental.",
+    "dismiss": "Entendido"
+  },
+  "home": {
+    "heading": "Bienvenida/o",
+    "intro": "Una Línea de Vida sitúa los acontecimientos importantes de tu vida a lo largo de una línea, desde el nacimiento hasta hoy. Marcar los momentos altos y bajos te ayuda a reconocer puntos de inflexión, fortalezas y temas en tu propia historia.",
+    "comingSoon": "El editor de la línea de vida está en construcción."
+  },
+  "footer": {
+    "privacy": "Tus datos se quedan en este navegador. No se envía nada a ningún servidor.",
+    "source": "Código fuente"
+  }
+}

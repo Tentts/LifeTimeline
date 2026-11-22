@@ -2,7 +2,7 @@
 
 ## What the technique is
 
-A **Life Timeline** (also called *Lifeline*, *Life Chart* or *Life History Graph*) is a structured
+A **Life Timeline** (also called _Lifeline_, _Life Chart_ or _Life History Graph_) is a structured
 reflection exercise in which a person places the significant events of their life along a time
 axis, usually rating each one as positive or negative. Reading the result in order helps the person
 see patterns, turning points, resources and recurring themes in their own story.
@@ -12,13 +12,13 @@ trauma-focused therapy.
 
 ## Main variants
 
-| Variant | Origin / context | Representation | Key prompts |
-|---|---|---|---|
-| **Lifeline graph** | Counselling & coaching handouts | X axis = time (age/years), Y axis = how good/bad life felt (e.g. -5…+5). Peaks = highs, valleys = lows. | Mark key events, read chronologically, identify turning points, lessons, values. |
-| **NET lifeline** | Narrative Exposure Therapy (Schauer, Neuner & Elbert) | A rope laid on the floor. **Flowers** = positive events/people, **stones** = traumatic events, sometimes **candles** = grief/loss, **sticks** = aggressive acts committed. | Place symbols chronologically from birth; each stone is later narrated in detail with a therapist. KidNET adapts it for children. |
-| **Life Story Interview** | Dan McAdams, narrative identity research | Life as a *book with chapters*. | Chapters, high point, low point, turning point, earliest memory, greatest challenge, central theme, future script. |
-| **ACT lifeline** | Acceptance & Commitment Therapy | Line used as metaphor for values-directed living. | What moved you toward / away from your values? |
-| **Life-area lifeline** | Career/life coaching (e.g. "Changing Gear") | Highs/lows plus ratings for life areas (health, relationships, finances…). | Current vs. desired life in each area. |
+| Variant                  | Origin / context                                      | Representation                                                                                                                                                             | Key prompts                                                                                                                       |
+| ------------------------ | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Lifeline graph**       | Counselling & coaching handouts                       | X axis = time (age/years), Y axis = how good/bad life felt (e.g. -5…+5). Peaks = highs, valleys = lows.                                                                    | Mark key events, read chronologically, identify turning points, lessons, values.                                                  |
+| **NET lifeline**         | Narrative Exposure Therapy (Schauer, Neuner & Elbert) | A rope laid on the floor. **Flowers** = positive events/people, **stones** = traumatic events, sometimes **candles** = grief/loss, **sticks** = aggressive acts committed. | Place symbols chronologically from birth; each stone is later narrated in detail with a therapist. KidNET adapts it for children. |
+| **Life Story Interview** | Dan McAdams, narrative identity research              | Life as a _book with chapters_.                                                                                                                                            | Chapters, high point, low point, turning point, earliest memory, greatest challenge, central theme, future script.                |
+| **ACT lifeline**         | Acceptance & Commitment Therapy                       | Line used as metaphor for values-directed living.                                                                                                                          | What moved you toward / away from your values?                                                                                    |
+| **Life-area lifeline**   | Career/life coaching (e.g. "Changing Gear")           | Highs/lows plus ratings for life areas (health, relationships, finances…).                                                                                                 | Current vs. desired life in each area.                                                                                            |
 
 ## Common building blocks (what the app must model)
 

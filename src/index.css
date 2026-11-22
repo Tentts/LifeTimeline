@@ -1,0 +1,144 @@
+:root {
+  --color-bg: #faf7f2;
+  --color-surface: #ffffff;
+  --color-text: #2b2b2b;
+  --color-muted: #6b6b6b;
+  --color-primary: #2f5d62;
+  --color-primary-contrast: #ffffff;
+  --color-positive: #5e8c61; /* flowers / highs */
+  --color-negative: #8c5e58; /* stones / lows */
+  --color-warning-bg: #fff4e0;
+  --color-warning-border: #e8c07d;
+  --radius: 10px;
+  --space: 1rem;
+  --max-width: 960px;
+
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  line-height: 1.55;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1c1f20;
+    --color-surface: #25292a;
+    --color-text: #e8e6e3;
+    --color-muted: #a3a3a3;
+    --color-primary: #7fb3b8;
+    --color-primary-contrast: #102022;
+    --color-warning-bg: #3a3122;
+    --color-warning-border: #8a6c36;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space);
+  gap: var(--space);
+}
+
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space);
+}
+
+.app-title {
+  margin: 0;
+  color: var(--color-primary);
+}
+
+.app-tagline {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+select,
+button {
+  font: inherit;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-muted);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+button {
+  cursor: pointer;
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+button:focus-visible,
+select:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.disclaimer {
+  background: var(--color-warning-bg);
+  border: 1px solid var(--color-warning-border);
+  border-radius: var(--radius);
+  padding: var(--space);
+}
+
+.disclaimer h2 {
+  margin-top: 0;
+  font-size: 1.1rem;
+}
+
+.app-main {
+  flex: 1;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  padding: calc(var(--space) * 1.5);
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+.app-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space);
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.app-footer p {
+  margin: 0;
+}
+
+.app-footer a {
+  color: var(--color-primary);
+}

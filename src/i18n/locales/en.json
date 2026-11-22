@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "nativeName": "English"
+  },
+  "app": {
+    "title": "Life Timeline",
+    "tagline": "Map the moments that shaped your story."
+  },
+  "language": {
+    "label": "Language"
+  },
+  "disclaimer": {
+    "title": "A tool for self-reflection, not therapy",
+    "body": "Revisiting difficult memories can be painful. Go at your own pace, add only what you feel comfortable with, and take breaks. If you are dealing with trauma or feel overwhelmed, please reach out to a mental health professional.",
+    "dismiss": "I understand"
+  },
+  "home": {
+    "heading": "Welcome",
+    "intro": "A Life Timeline places the important events of your life along a line, from birth to today. Marking the highs and lows helps you notice turning points, strengths and themes in your own story.",
+    "comingSoon": "The timeline editor is under construction."
+  },
+  "footer": {
+    "privacy": "Your data stays in this browser. Nothing is sent to any server.",
+    "source": "Source code"
+  }
+}

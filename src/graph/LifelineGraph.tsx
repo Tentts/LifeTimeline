@@ -281,7 +281,7 @@ function EventMarker({
   );
 }
 
-function SymbolShape({
+export function SymbolShape({
   symbol,
   x,
   y,

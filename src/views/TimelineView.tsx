@@ -1,6 +1,9 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { CompactGraphSection } from '../components/CompactGraphSection';
 import { ConfirmDialog } from '../components/ConfirmDialog';
+import { COMPACT_BREAKPOINT } from '../graph/CompactLifelineGraph';
+import { useElementWidth } from '../graph/useElementWidth';
 import { EventDialog } from '../components/EventDialog';
 import { EventList } from '../components/EventList';
 import { ExportDialog } from '../components/ExportDialog';
@@ -24,6 +27,10 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
   const [editingDetails, setEditingDetails] = useState(false);
   const [exporting, setExporting] = useState(false);
   const locale = i18n.resolvedLanguage ?? 'en';
+  // Phones get the compact graph; everything wider keeps the desktop graph unchanged.
+  const graphRef = useRef<HTMLDivElement>(null);
+  const graphWidth = useElementWidth(graphRef);
+  const isCompact = graphWidth !== null && graphWidth < COMPACT_BREAKPOINT;
 
   const editEvent = (id: string) => {
     const event = timeline.events.find((e) => e.id === id);
@@ -77,8 +84,12 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
 
       <section className="card">
         <h3 className="visually-hidden">{t('timeline.graphHeading')}</h3>
-        <div className="graph-container">
-          <LifelineGraph timeline={timeline} palette={SCREEN_PALETTE} onSelectEvent={editEvent} />
+        <div className="graph-container" ref={graphRef}>
+          {isCompact ? (
+            <CompactGraphSection timeline={timeline} width={graphWidth} onEdit={editEvent} />
+          ) : (
+            <LifelineGraph timeline={timeline} palette={SCREEN_PALETTE} onSelectEvent={editEvent} />
+          )}
         </div>
         <p className="hint">{t('timeline.savedLocally')}</p>
       </section>

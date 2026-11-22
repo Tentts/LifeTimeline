@@ -18,6 +18,7 @@
     "cancel": "Cancel",
     "close": "Close",
     "delete": "Delete",
+    "edit": "Edit",
     "ok": "OK",
     "save": "Save"
   },
@@ -160,7 +161,9 @@
     "age": "age {{age}}",
     "highs": "Highs",
     "lows": "Lows",
-    "empty": "Add your first event to start drawing your lifeline."
+    "empty": "Add your first event to start drawing your lifeline.",
+    "emptyShort": "Add your first event to start.",
+    "tapHint": "Tap a point on the line to see that event."
   },
   "export": {
     "title": "Export timeline",

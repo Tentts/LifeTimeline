@@ -43,7 +43,14 @@ export const truncate = (s: string, max = MAX_LABEL_CHARS) =>
 
 export function computeLayout(
   timeline: Timeline,
-  options: { width?: number; height?: number; margins?: GraphMargins; now?: Date } = {},
+  options: {
+    width?: number;
+    height?: number;
+    margins?: GraphMargins;
+    now?: Date;
+    /** Most year labels on the x axis. Default 12 (desktop); phones pass fewer. */
+    maxTicks?: number;
+  } = {},
 ): GraphLayout {
   const width = options.width ?? GRAPH_WIDTH;
   const height = options.height ?? GRAPH_HEIGHT;
@@ -73,7 +80,8 @@ export function computeLayout(
   plot.zeroY = y(0);
 
   const span = end - start;
-  const step = TICK_STEPS.find((s) => span / s <= 12) ?? 100;
+  const maxTicks = options.maxTicks ?? 12;
+  const step = TICK_STEPS.find((s) => span / s <= maxTicks) ?? 100;
   const xTicks: GraphLayout['xTicks'] = [];
   for (let year = Math.ceil(start / step) * step; year <= end; year += step) {
     xTicks.push({ x: x(year), year, age: ageAt(birthDate, { year }) });

@@ -209,6 +209,15 @@
     "deleteTitle": "¿Eliminar este capítulo?",
     "deleteBody": "«{{title}}» se eliminará. Los acontecimientos de esa época seguirán en tu línea de vida."
   },
+  "about": {
+    "back": "Volver",
+    "heading": "Acerca de Línea de Vida",
+    "app": "Línea de Vida es una herramienta gratuita y de código abierto para trazar los momentos que dieron forma a tu historia. Funciona por completo en tu navegador, sin cuentas ni servidores.",
+    "creatorHeading": "Quién la ha creado",
+    "creator": "Hola, soy Tentts. Me gusta desarrollar software práctico y aprender de distintos campos.",
+    "projects": "Mi trabajo abarca el aprendizaje automático, la visión por computador, la robótica, la ciberseguridad y el IoT.",
+    "github": "Tentts en GitHub"
+  },
   "example": {
     "badge": "Ejemplo",
     "title": "La vida de Alex (ejemplo)",
@@ -475,6 +484,7 @@
   "footer": {
     "privacy": "Tus datos se quedan en este navegador. No se envía nada a ningún servidor.",
     "privacyLink": "Privacidad",
+    "aboutLink": "Acerca de",
     "source": "Código fuente"
   }
 }

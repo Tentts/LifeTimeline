@@ -2,9 +2,11 @@ import { useTranslation } from 'react-i18next';
 
 export function Footer({
   onShowPrivacy,
+  onShowAbout,
   onShowSupport,
 }: {
   onShowPrivacy: () => void;
+  onShowAbout: () => void;
   onShowSupport: () => void;
 }) {
   const { t } = useTranslation();
@@ -18,6 +20,9 @@ export function Footer({
         </button>
         <button type="button" className="link-button" onClick={onShowPrivacy}>
           {t('footer.privacyLink')}
+        </button>
+        <button type="button" className="link-button" onClick={onShowAbout}>
+          {t('footer.aboutLink')}
         </button>
         <a href="https://github.com/Tentts/LifeTimeline" target="_blank" rel="noreferrer">
           {t('footer.source')}

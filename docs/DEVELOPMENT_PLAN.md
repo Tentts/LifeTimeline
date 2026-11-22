@@ -135,7 +135,7 @@ The same message is also available any time from a "Privacy" link in the footer.
 - ✅ Step-by-step wizard (birth → childhood → adolescence → adulthood → present) with prompts
   inspired by the Lifeline and McAdams Life Story Interview.
 - ✅ Chapters/periods as background bands on the graph.
-- Turning points highlighted; reflection page with guided questions.
+- ✅ Turning points highlighted; reflection page with guided questions.
 - Safety features: "take a break" prompts, crisis-resources page.
 
 ### Phase 3 — Views & sharing

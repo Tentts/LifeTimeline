@@ -50,6 +50,8 @@ devices or browsers, and open it again later. It is the **only** format the app 
 ```
 
 The `timeline` object follows the data model in [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md#core-data-model-v1).
+An optional `reflectionAnswers` object holds answers to the guided questions (`themes`, `strengths`,
+`turningPoints`, `patterns`, `values`, `nextChapter`).
 `FuzzyDate` = `{ year, month?, day?, approx? }`. Month and day are optional so users can record
 approximate memories.
 

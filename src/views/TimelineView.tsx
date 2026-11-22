@@ -15,6 +15,9 @@ import { SCREEN_PALETTE } from '../graph/palette';
 import { emptyEventDraft, newId, type EventDraft } from '../model/factory';
 import type { LifeEvent, Timeline } from '../model/schema';
 import { useTimelines } from '../state/TimelinesContext';
+import { CheckInDialog } from '../support/CheckInDialog';
+import { checkInsEnabled, shouldCheckIn } from '../support/checkIn';
+import { SupportDialog } from '../support/SupportDialog';
 import { GuidedWizard } from '../wizard/GuidedWizard';
 import { loadProgress } from '../wizard/stages';
 import { ReflectionView } from './ReflectionView';
@@ -32,6 +35,10 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
   const [exporting, setExporting] = useState(false);
   const [guiding, setGuiding] = useState(false);
   const [reflecting, setReflecting] = useState(false);
+  const [checkingIn, setCheckingIn] = useState(false);
+  const [showSupport, setShowSupport] = useState(false);
+  const [openedAt] = useState(() => Date.now());
+  const lastCheckIn = useRef<number | null>(null);
   const openReflection = () => {
     setGuiding(false);
     setReflecting(true);
@@ -50,6 +57,20 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
 
   const saveEvent = (draft: EventDraft) => {
     if (!editing) return;
+    const now = Date.now();
+    if (
+      checkInsEnabled() &&
+      shouldCheckIn({
+        previousValence: editing.mode === 'edit' ? editing.event.valence : undefined,
+        valence: draft.valence,
+        openedAt,
+        lastCheckInAt: lastCheckIn.current,
+        now,
+      })
+    ) {
+      lastCheckIn.current = now;
+      setCheckingIn(true);
+    }
     if (editing.mode === 'create') {
       update((tl) => ({ ...tl, events: [...tl.events, { ...draft, id: newId() }] }));
     } else {
@@ -221,6 +242,17 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
       )}
 
       {exporting && <ExportDialog timeline={timeline} onClose={() => setExporting(false)} />}
+
+      {checkingIn && (
+        <CheckInDialog
+          onClose={() => setCheckingIn(false)}
+          onFindSupport={() => {
+            setCheckingIn(false);
+            setShowSupport(true);
+          }}
+        />
+      )}
+      {showSupport && <SupportDialog onClose={() => setShowSupport(false)} />}
     </div>
   );
 }

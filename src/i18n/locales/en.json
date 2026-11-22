@@ -195,6 +195,50 @@
     "deleteTitle": "Delete this chapter?",
     "deleteBody": "“{{title}}” will be removed. The events from that time stay on your timeline."
   },
+  "support": {
+    "footerLink": "Need support?",
+    "title": "Find support",
+    "lead": "You don’t have to carry difficult memories alone. Talking to someone can help, whether or not you’re in crisis.",
+    "emergency": "If you or someone else is in immediate danger, call your local emergency number now.",
+    "linesHeading": "Crisis lines",
+    "call": "Call {{number}}",
+    "website": "Website",
+    "emergencyNumber": "Emergency: {{number}}",
+    "usSpanish": "Press 2 for Spanish.",
+    "regions": {
+      "us": "United States",
+      "ca": "Canada",
+      "ukie": "United Kingdom and Ireland",
+      "es": "Spain",
+      "mx": "Mexico",
+      "au": "Australia"
+    },
+    "otherHeading": "Somewhere else?",
+    "otherBody": "Find A Helpline is a free international directory of crisis lines.",
+    "otherLink": "Find a helpline",
+    "privacy": "These links open other websites or your phone app. Nothing from your timeline is shared with them.",
+    "checkInsToggle": "Show gentle check-ins while I work"
+  },
+  "checkIn": {
+    "title": "How are you doing?",
+    "body": "Going back to difficult moments takes energy. Your work is saved, so you can pause whenever you need to.",
+    "keepGoing": "Keep going",
+    "takeBreak": "Take a break",
+    "findSupport": "Find support",
+    "stop": "Don’t show these check-ins",
+    "breakTitle": "Take a moment",
+    "breakIntro": "If it helps, bring your attention back to the room around you. Notice:",
+    "steps": {
+      "see": "5 things you can see",
+      "touch": "4 things you can touch",
+      "hear": "3 things you can hear",
+      "smell": "2 things you can smell",
+      "taste": "1 thing you can taste"
+    },
+    "breathe": "Then take a few slow breaths, letting each breath out last a little longer than the one before.",
+    "saved": "Everything is saved in this browser. You can close this page and come back any time.",
+    "ready": "I’m ready to continue"
+  },
   "reflection": {
     "button": "Reflect",
     "back": "Back to timeline",

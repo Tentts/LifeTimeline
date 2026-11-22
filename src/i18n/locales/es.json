@@ -43,8 +43,22 @@
   "date": {
     "year": "Año",
     "month": "Mes",
-    "day": "Día",
-    "unknown": "No lo sé",
+    "select": "Elegir una fecha",
+    "pickerLabel": "Calendario",
+    "precision": "¿Cómo de exacta es esta fecha?",
+    "precisions": {
+      "day": "Día exacto",
+      "month": "Solo el mes",
+      "year": "Solo el año"
+    },
+    "precisionHints": {
+      "month": "¿No recuerdas el día? Basta con el mes.",
+      "year": "¿No recuerdas el mes? Basta con el año."
+    },
+    "prevMonth": "Mes anterior",
+    "nextMonth": "Mes siguiente",
+    "today": "Hoy",
+    "done": "Listo",
     "approx": "Aproximada",
     "approxLabel": "aprox. {{date}}",
     "errors": {

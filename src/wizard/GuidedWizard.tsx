@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useEventWhen } from '../components/useEventDateLabel';
 import { formatValence, valenceKey } from '../components/valence';
 import { emptyEventDraft, sortEvents, type EventDraft } from '../model/factory';
+import { todayAsFuzzyDate } from '../model/fuzzyDate';
 import type { Timeline } from '../model/schema';
 import {
   eventsInStage,
@@ -67,8 +68,6 @@ export function GuidedWizard({
     onClose();
   };
 
-  const thisYear = new Date().getFullYear();
-
   return (
     <section className="card wizard" aria-labelledby="wizard-step-title">
       <div className="wizard-top">
@@ -113,7 +112,7 @@ export function GuidedWizard({
         <KeyMomentsStep
           timeline={timeline}
           headingRef={headingRef}
-          onAdd={(patch) => onAddEvent({ ...emptyEventDraft({ year: thisYear }), ...patch })}
+          onAdd={(patch) => onAddEvent({ ...emptyEventDraft(todayAsFuzzyDate()), ...patch })}
         />
       )}
 

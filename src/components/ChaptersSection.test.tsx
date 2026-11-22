@@ -5,6 +5,7 @@ import { parseTimelineFile, serializeTimeline } from '../format/tl';
 import i18n from '../i18n';
 import { createTimeline } from '../model/factory';
 import { deleteAllData, getTimeline, saveTimeline } from '../storage/db';
+import { dateTriggers, enterYear } from '../test/dates';
 
 async function openWithChapters(periods: Parameters<typeof withPeriods>[0] = []) {
   const user = userEvent.setup();
@@ -37,9 +38,8 @@ describe('chapters', () => {
     await user.click(screen.getByRole('button', { name: '+ Add chapter' }));
     const dialog = screen.getByRole('dialog', { name: 'Add a chapter' });
     await user.type(within(dialog).getByLabelText(/Chapter name/), 'University');
-    const [from, until] = within(dialog).getAllByLabelText('Year');
-    await user.type(from, '2008');
-    await user.type(until, '2012');
+    await enterYear(user, dialog, '2008', 0);
+    await enterYear(user, dialog, '2012', 1);
     await user.click(within(dialog).getByRole('button', { name: 'Save' }));
 
     const section = screen.getByRole('region', { name: 'Chapters' });
@@ -60,9 +60,9 @@ describe('chapters', () => {
     await user.click(screen.getByRole('button', { name: '+ Add chapter' }));
     const dialog = screen.getByRole('dialog', { name: 'Add a chapter' });
     await user.type(within(dialog).getByLabelText(/Chapter name/), 'Living abroad');
-    await user.type(within(dialog).getAllByLabelText('Year')[0], '2020');
+    await enterYear(user, dialog, '2020');
     await user.click(within(dialog).getByLabelText('This chapter is still going on'));
-    expect(within(dialog).getAllByLabelText('Year')).toHaveLength(1);
+    expect(dateTriggers(dialog)).toHaveLength(1);
     await user.click(within(dialog).getByRole('button', { name: 'Save' }));
 
     expect(screen.getByText(/2020 – today/)).toBeInTheDocument();
@@ -73,9 +73,8 @@ describe('chapters', () => {
     await user.click(screen.getByRole('button', { name: '+ Add chapter' }));
     const dialog = screen.getByRole('dialog', { name: 'Add a chapter' });
     await user.type(within(dialog).getByLabelText(/Chapter name/), 'Backwards');
-    const [from, until] = within(dialog).getAllByLabelText('Year');
-    await user.type(from, '2012');
-    await user.type(until, '2008');
+    await enterYear(user, dialog, '2012', 0);
+    await enterYear(user, dialog, '2008', 1);
     await user.click(within(dialog).getByRole('button', { name: 'Save' }));
 
     expect(within(dialog).getByRole('alert')).toHaveTextContent(

@@ -9,6 +9,13 @@
   "language": {
     "label": "Idioma"
   },
+  "common": {
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "delete": "Eliminar",
+    "ok": "Aceptar",
+    "save": "Guardar"
+  },
   "disclaimer": {
     "title": "Una herramienta de autorreflexión, no de terapia",
     "body": "Revisar recuerdos difíciles puede ser doloroso. Ve a tu propio ritmo, añade solo lo que te resulte cómodo y tómate descansos. Si estás atravesando un trauma o te sientes desbordado/a, busca el apoyo de un profesional de la salud mental.",
@@ -17,10 +24,169 @@
   "home": {
     "heading": "Bienvenida/o",
     "intro": "Una Línea de Vida sitúa los acontecimientos importantes de tu vida a lo largo de una línea, desde el nacimiento hasta hoy. Marcar los momentos altos y bajos te ayuda a reconocer puntos de inflexión, fortalezas y temas en tu propia historia.",
-    "comingSoon": "El editor de la línea de vida está en construcción."
+    "new": "Nueva línea de vida",
+    "savedHeading": "Líneas de vida en este navegador",
+    "savedHint": "Se guardan solo en este navegador, en este dispositivo.",
+    "empty": "Todavía no hay ninguna. Crea una o abre un archivo .tl que hayas exportado antes.",
+    "summary_one": "{{count}} acontecimiento · editada el {{date}}",
+    "summary_other": "{{count}} acontecimientos · editada el {{date}}",
+    "deleteLabel": "Eliminar «{{title}}»",
+    "deleteTitle": "¿Eliminar esta línea de vida?",
+    "deleteBody": "«{{title}}» se eliminará de este navegador. No se puede deshacer. Si quizá la necesites más adelante, expórtala antes como archivo .tl."
+  },
+  "date": {
+    "year": "Año",
+    "month": "Mes",
+    "day": "Día",
+    "unknown": "No lo sé",
+    "approx": "Aproximada",
+    "approxLabel": "aprox. {{date}}",
+    "errors": {
+      "required": "Indica al menos el año.",
+      "invalid": "Esta fecha no parece correcta. Revisa el año (1850–2200) y el día."
+    }
+  },
+  "timelineForm": {
+    "createTitle": "Nueva línea de vida",
+    "editTitle": "Datos de la línea de vida",
+    "create": "Crear línea de vida",
+    "title": "Título",
+    "titlePlaceholder": "p. ej. Mi vida hasta hoy",
+    "titleRequired": "Ponle un título a tu línea de vida.",
+    "name": "Nombre (opcional)",
+    "nameHint": "¿De quién es esta historia? Puedes dejarlo en blanco.",
+    "birthDate": "Fecha de nacimiento"
+  },
+  "privacy": {
+    "title": "Tu privacidad",
+    "lead": "Nunca recibimos ni guardamos tu línea de vida. Esta aplicación es solo un conjunto de herramientas que funciona en tu navegador.",
+    "points": {
+      "localOnly": "Tu línea de vida se guarda solo en este navegador, en este dispositivo. Nunca se envía a nosotros ni a nadie más.",
+      "canBeLost": "Si borras los datos del navegador, usas el modo privado/incógnito o cambias de navegador o dispositivo, no estará allí.",
+      "backup": "Para tener una copia de seguridad o continuar en otro dispositivo, usa Exportar → archivo .tl y después Abrir archivo .tl para cargarla de nuevo.",
+      "filesAreSensitive": "Los archivos que exportes (.tl, PDF, PNG) contienen tu historia personal. Guárdalos en un lugar seguro."
+    },
+    "acknowledge": "Entiendo que mi línea de vida se guarda solo en este navegador y que soy responsable de exportar una copia de seguridad.",
+    "howHeading": "Cómo se garantiza",
+    "how": {
+      "noServer": "No hay servidor ni cuentas. La aplicación es un sitio web estático y todo el trabajo ocurre en tu dispositivo.",
+      "blocked": "La aplicación indica a tu navegador que bloquee cualquier intento de enviar datos por la red.",
+      "exports": "Las exportaciones se crean en tu dispositivo y se descargan directamente. No se sube nada."
+    },
+    "deleteHeading": "Eliminar todo",
+    "deleteBody": "Elimina todas las líneas de vida y ajustes que esta aplicación ha guardado en este navegador.",
+    "deleteButton": "Eliminar todos mis datos de este navegador",
+    "deleteConfirmTitle": "¿Eliminar todos tus datos?",
+    "deleteConfirmBody_one": "Se eliminarán de este navegador {{count}} línea de vida y todos los ajustes. No se puede deshacer.",
+    "deleteConfirmBody_other": "Se eliminarán de este navegador {{count}} líneas de vida y todos los ajustes. No se puede deshacer.",
+    "deleted": "Se han eliminado todos los datos de este navegador."
+  },
+  "import": {
+    "open": "Abrir archivo .tl",
+    "errorTitle": "No se pudo abrir el archivo",
+    "errors": {
+      "tooLarge": "El archivo es demasiado grande (más de 10 MB) para ser una línea de vida.",
+      "notJson": "No es un archivo de Línea de Vida. No se pudo leer su contenido.",
+      "notTimelineFile": "No es un archivo de Línea de Vida (.tl).",
+      "newerVersion": "Este archivo se creó con una versión más reciente de la aplicación. Recarga la página para obtener la última versión e inténtalo de nuevo.",
+      "invalid": "El archivo está dañado o incompleto, así que no se puede abrir."
+    },
+    "conflictTitle": "Esta línea de vida ya está aquí",
+    "conflictBody": "«{{title}}» ya existe en este navegador. ¿Quieres reemplazarla con el archivo o conservar ambas?",
+    "keepBoth": "Conservar ambas",
+    "replace": "Reemplazar"
+  },
+  "timeline": {
+    "back": "Todas las líneas de vida",
+    "eventCount_one": "{{count}} acontecimiento",
+    "eventCount_other": "{{count}} acontecimientos",
+    "addEvent": "Añadir acontecimiento",
+    "export": "Exportar",
+    "editDetails": "Datos",
+    "graphHeading": "Gráfico de la línea de vida",
+    "savedLocally": "Los cambios se guardan automáticamente solo en este navegador. Exporta un archivo .tl para tener una copia de seguridad.",
+    "eventsHeading": "Acontecimientos",
+    "noEvents": "Aún no hay acontecimientos. Empieza por cualquier recuerdo que sientas importante. Siempre puedes añadir más después.",
+    "deleteEventTitle": "¿Eliminar este acontecimiento?",
+    "deleteEventBody": "«{{title}}» se eliminará de tu línea de vida."
+  },
+  "eventForm": {
+    "createTitle": "Añadir un acontecimiento",
+    "editTitle": "Editar acontecimiento",
+    "gentleHint": "Solo hacen falta el título y el año. Añade tanto o tan poco detalle como te parezca bien.",
+    "title": "¿Qué pasó?",
+    "titlePlaceholder": "p. ej. Me mudé a otra ciudad",
+    "titleRequired": "Añade un título breve.",
+    "start": "Cuándo",
+    "hasEnd": "Duró un periodo de tiempo",
+    "end": "Hasta",
+    "valence": "¿Cómo lo viviste?",
+    "symbol": "Símbolo",
+    "symbolHint": "Opcional. Las flores y las piedras provienen del ejercicio de la línea de vida usado en terapia.",
+    "turningPoint": "Fue un punto de inflexión",
+    "turningPointBadge": "Punto de inflexión",
+    "tags": "Áreas de la vida",
+    "tagsPlaceholder": "p. ej. familia, trabajo, salud",
+    "people": "Personas implicadas",
+    "listHint": "Separa varias con comas.",
+    "description": "Descripción",
+    "descriptionPlaceholder": "¿Qué recuerdas de ello?",
+    "reflection": "Reflexión",
+    "reflectionPlaceholder": "Mirando atrás, ¿qué te enseñó? ¿Qué te ayudó a superarlo?"
+  },
+  "valence": {
+    "veryHard": "muy difícil",
+    "hard": "difícil",
+    "neutral": "neutral",
+    "good": "bueno",
+    "veryGood": "muy bueno"
+  },
+  "symbols": {
+    "none": "Ninguno",
+    "flower": "Flor: un momento o una persona positiva",
+    "stone": "Piedra: un momento doloroso o traumático",
+    "candle": "Vela: una pérdida o un duelo",
+    "stick": "Palo: un momento de conflicto",
+    "star": "Estrella: un logro o un momento de orgullo"
+  },
+  "graph": {
+    "ariaLabel_one": "Gráfico de la línea de vida «{{title}}» con {{count}} acontecimiento. Los mismos acontecimientos aparecen en la lista inferior.",
+    "ariaLabel_other": "Gráfico de la línea de vida «{{title}}» con {{count}} acontecimientos. Los mismos acontecimientos aparecen en la lista inferior.",
+    "age": "{{age}} años",
+    "highs": "Momentos altos",
+    "lows": "Momentos bajos",
+    "empty": "Añade tu primer acontecimiento para empezar a dibujar tu línea de vida."
+  },
+  "export": {
+    "title": "Exportar línea de vida",
+    "localOnly": "Los archivos se crean en tu dispositivo y se descargan directamente. No se sube nada.",
+    "working": "Preparando…",
+    "failed": "Algo salió mal al crear el archivo. Inténtalo de nuevo.",
+    "keepSafe": "Los archivos exportados contienen tu historia personal. Guárdalos en un lugar seguro.",
+    "formats": {
+      "tl": {
+        "label": "Archivo de línea de vida (.tl)",
+        "description": "Tu copia de seguridad. Ábrela más tarde en esta aplicación para seguir trabajando."
+      },
+      "pdf": {
+        "label": "Documento PDF",
+        "description": "El gráfico y la lista completa de acontecimientos. Útil para imprimir o compartir con tu terapeuta."
+      },
+      "png": {
+        "label": "Imagen PNG",
+        "description": "Una imagen del gráfico de la línea de vida."
+      }
+    }
+  },
+  "pdf": {
+    "eventsHeading": "Acontecimientos",
+    "born": "nacimiento: {{date}}",
+    "exported": "exportado el {{date}}",
+    "footer": "Línea de Vida · una herramienta de autorreflexión, no de terapia"
   },
   "footer": {
     "privacy": "Tus datos se quedan en este navegador. No se envía nada a ningún servidor.",
+    "privacyLink": "Privacidad",
     "source": "Código fuente"
   }
 }

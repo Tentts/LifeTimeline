@@ -118,7 +118,7 @@ The same message is also available any time from a "Privacy" link in the footer.
 - GitHub Actions workflow deploying `dist/` to GitHub Pages.
 - Base layout, disclaimer banner, EN/ES strings.
 
-### Phase 1 — MVP
+### Phase 1 — MVP ✅ done
 
 - CSP meta tag and the test that guards it.
 - "New timeline" step (title, birth date) **with the privacy notice**; footer "Privacy" page;

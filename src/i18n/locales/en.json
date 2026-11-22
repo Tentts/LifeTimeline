@@ -9,6 +9,13 @@
   "language": {
     "label": "Language"
   },
+  "common": {
+    "cancel": "Cancel",
+    "close": "Close",
+    "delete": "Delete",
+    "ok": "OK",
+    "save": "Save"
+  },
   "disclaimer": {
     "title": "A tool for self-reflection, not therapy",
     "body": "Revisiting difficult memories can be painful. Go at your own pace, add only what you feel comfortable with, and take breaks. If you are dealing with trauma or feel overwhelmed, please reach out to a mental health professional.",
@@ -17,10 +24,169 @@
   "home": {
     "heading": "Welcome",
     "intro": "A Life Timeline places the important events of your life along a line, from birth to today. Marking the highs and lows helps you notice turning points, strengths and themes in your own story.",
-    "comingSoon": "The timeline editor is under construction."
+    "new": "New timeline",
+    "savedHeading": "Timelines in this browser",
+    "savedHint": "These are stored only in this browser, on this device.",
+    "empty": "No timelines yet. Create one, or open a .tl file you exported before.",
+    "summary_one": "{{count}} event · last edited {{date}}",
+    "summary_other": "{{count}} events · last edited {{date}}",
+    "deleteLabel": "Delete “{{title}}”",
+    "deleteTitle": "Delete this timeline?",
+    "deleteBody": "“{{title}}” will be removed from this browser. This can’t be undone. If you might want it later, export it as a .tl file first."
+  },
+  "date": {
+    "year": "Year",
+    "month": "Month",
+    "day": "Day",
+    "unknown": "Not sure",
+    "approx": "Approximate",
+    "approxLabel": "c. {{date}}",
+    "errors": {
+      "required": "Please enter at least the year.",
+      "invalid": "This date doesn’t look right. Check the year (1850–2200) and day."
+    }
+  },
+  "timelineForm": {
+    "createTitle": "New timeline",
+    "editTitle": "Timeline details",
+    "create": "Create timeline",
+    "title": "Title",
+    "titlePlaceholder": "e.g. My life so far",
+    "titleRequired": "Please give your timeline a title.",
+    "name": "Name (optional)",
+    "nameHint": "Whose story is this? You can leave it blank.",
+    "birthDate": "Date of birth"
+  },
+  "privacy": {
+    "title": "Your privacy",
+    "lead": "We never receive or store your timeline. This app is just a set of tools that runs in your browser.",
+    "points": {
+      "localOnly": "Your timeline is saved only in this browser, on this device. It is never sent to us or anyone else.",
+      "canBeLost": "Clearing your browser data, using private/incognito mode, or switching to another browser or device means it won’t be there.",
+      "backup": "To keep a backup or continue on another device, use Export → .tl file, then Open .tl file to load it again.",
+      "filesAreSensitive": "Files you export (.tl, PDF, PNG) contain your personal story. Keep them somewhere safe."
+    },
+    "acknowledge": "I understand that my timeline is stored only in this browser and that I’m responsible for exporting a backup.",
+    "howHeading": "How this is guaranteed",
+    "how": {
+      "noServer": "There is no server or account. The app is a static website and all work happens on your device.",
+      "blocked": "The app tells your browser to block any attempt to send data over the network.",
+      "exports": "Exports are created on your device and downloaded directly. Nothing is uploaded."
+    },
+    "deleteHeading": "Delete everything",
+    "deleteBody": "Remove all timelines and settings this app has stored in this browser.",
+    "deleteButton": "Delete all my data from this browser",
+    "deleteConfirmTitle": "Delete all your data?",
+    "deleteConfirmBody_one": "{{count}} timeline and all settings will be removed from this browser. This can’t be undone.",
+    "deleteConfirmBody_other": "{{count}} timelines and all settings will be removed from this browser. This can’t be undone.",
+    "deleted": "All data has been deleted from this browser."
+  },
+  "import": {
+    "open": "Open .tl file",
+    "errorTitle": "This file couldn’t be opened",
+    "errors": {
+      "tooLarge": "The file is too large (over 10 MB) to be a timeline.",
+      "notJson": "This isn’t a Life Timeline file. The content couldn’t be read.",
+      "notTimelineFile": "This isn’t a Life Timeline (.tl) file.",
+      "newerVersion": "This file was made with a newer version of the app. Reload the page to get the latest version and try again.",
+      "invalid": "This timeline file is damaged or incomplete, so it can’t be opened."
+    },
+    "conflictTitle": "This timeline is already here",
+    "conflictBody": "“{{title}}” already exists in this browser. Replace it with the file, or keep both?",
+    "keepBoth": "Keep both",
+    "replace": "Replace"
+  },
+  "timeline": {
+    "back": "All timelines",
+    "eventCount_one": "{{count}} event",
+    "eventCount_other": "{{count}} events",
+    "addEvent": "Add event",
+    "export": "Export",
+    "editDetails": "Details",
+    "graphHeading": "Lifeline graph",
+    "savedLocally": "Changes are saved automatically in this browser only. Export a .tl file to keep a backup.",
+    "eventsHeading": "Events",
+    "noEvents": "No events yet. Start with any memory that feels important. You can always add more later.",
+    "deleteEventTitle": "Delete this event?",
+    "deleteEventBody": "“{{title}}” will be removed from your timeline."
+  },
+  "eventForm": {
+    "createTitle": "Add an event",
+    "editTitle": "Edit event",
+    "gentleHint": "Only the title and the year are needed. Add as much or as little detail as feels right.",
+    "title": "What happened?",
+    "titlePlaceholder": "e.g. Moved to a new city",
+    "titleRequired": "Please add a short title.",
+    "start": "When",
+    "hasEnd": "This lasted for a period of time",
+    "end": "Until",
+    "valence": "How did it feel?",
+    "symbol": "Symbol",
+    "symbolHint": "Optional. Flowers and stones come from the lifeline exercise used in therapy.",
+    "turningPoint": "This was a turning point",
+    "turningPointBadge": "Turning point",
+    "tags": "Life areas",
+    "tagsPlaceholder": "e.g. family, work, health",
+    "people": "People involved",
+    "listHint": "Separate several with commas.",
+    "description": "Description",
+    "descriptionPlaceholder": "What do you remember about it?",
+    "reflection": "Reflection",
+    "reflectionPlaceholder": "Looking back, what did it teach you? What helped you get through it?"
+  },
+  "valence": {
+    "veryHard": "very difficult",
+    "hard": "difficult",
+    "neutral": "neutral",
+    "good": "good",
+    "veryGood": "very good"
+  },
+  "symbols": {
+    "none": "None",
+    "flower": "Flower: a positive moment or person",
+    "stone": "Stone: a painful or traumatic moment",
+    "candle": "Candle: a loss or grief",
+    "stick": "Stick: a moment of conflict",
+    "star": "Star: an achievement or proud moment"
+  },
+  "graph": {
+    "ariaLabel_one": "Lifeline graph of “{{title}}” with {{count}} event. The same events are listed below.",
+    "ariaLabel_other": "Lifeline graph of “{{title}}” with {{count}} events. The same events are listed below.",
+    "age": "age {{age}}",
+    "highs": "Highs",
+    "lows": "Lows",
+    "empty": "Add your first event to start drawing your lifeline."
+  },
+  "export": {
+    "title": "Export timeline",
+    "localOnly": "Files are created on your device and downloaded directly. Nothing is uploaded.",
+    "working": "Preparing…",
+    "failed": "Something went wrong while creating the file. Please try again.",
+    "keepSafe": "Exported files contain your personal story. Keep them somewhere safe.",
+    "formats": {
+      "tl": {
+        "label": "Timeline file (.tl)",
+        "description": "Your backup. Open it later in this app to keep working."
+      },
+      "pdf": {
+        "label": "PDF document",
+        "description": "Graph plus the full list of events. Good for printing or sharing with a therapist."
+      },
+      "png": {
+        "label": "PNG image",
+        "description": "A picture of the lifeline graph."
+      }
+    }
+  },
+  "pdf": {
+    "eventsHeading": "Events",
+    "born": "born {{date}}",
+    "exported": "exported {{date}}",
+    "footer": "Life Timeline · a self-reflection tool, not therapy"
   },
   "footer": {
     "privacy": "Your data stays in this browser. Nothing is sent to any server.",
+    "privacyLink": "Privacy",
     "source": "Source code"
   }
 }

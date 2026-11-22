@@ -1,21 +1,38 @@
-import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 import { DisclaimerBanner } from './components/DisclaimerBanner';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
+import { TimelinesProvider, useTimelines } from './state/TimelinesContext';
+import { HomeView } from './views/HomeView';
+import { PrivacyView } from './views/PrivacyView';
+import { TimelineView } from './views/TimelineView';
 
 export default function App() {
-  const { t } = useTranslation();
+  return (
+    <TimelinesProvider>
+      <Shell />
+    </TimelinesProvider>
+  );
+}
+
+function Shell() {
+  const { current } = useTimelines();
+  const [showPrivacy, setShowPrivacy] = useState(false);
 
   return (
     <div className="app">
       <Header />
       <DisclaimerBanner />
       <main className="app-main">
-        <h2>{t('home.heading')}</h2>
-        <p>{t('home.intro')}</p>
-        <p className="muted">{t('home.comingSoon')}</p>
+        {showPrivacy ? (
+          <PrivacyView onBack={() => setShowPrivacy(false)} />
+        ) : current ? (
+          <TimelineView key={current.id} timeline={current} />
+        ) : (
+          <HomeView />
+        )}
       </main>
-      <Footer />
+      <Footer onShowPrivacy={() => setShowPrivacy(true)} />
     </div>
   );
 }

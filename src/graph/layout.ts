@@ -1,9 +1,17 @@
 import { sortEvents } from '../model/factory';
 import { ageAt, toDecimalYear, todayAsFuzzyDate } from '../model/fuzzyDate';
-import { MAX_VALENCE, MIN_VALENCE, type LifeEvent, type Timeline } from '../model/schema';
+import { chapterColor, periodRange, rangeEnd, sortPeriods } from '../model/periods';
+import {
+  MAX_VALENCE,
+  MIN_VALENCE,
+  type LifeEvent,
+  type LifePeriod,
+  type Timeline,
+} from '../model/schema';
 
 export const GRAPH_WIDTH = 1000;
 export const GRAPH_HEIGHT = 440;
+const DEFAULT_RIBBON_HEIGHT = 17;
 
 export interface GraphMargins {
   top: number;
@@ -23,6 +31,20 @@ export interface PlacedEvent {
   label: { x: number; y: number; anchor: 'start' | 'middle' | 'end' };
 }
 
+export interface ChapterBand {
+  id: string;
+  name: string;
+  color: string;
+  x: number;
+  width: number;
+  /** The tinted background always spans the full height: height on the graph means feeling. */
+  y: number;
+  height: number;
+  /** The named ribbon above the graph. Overlapping chapters use separate rows. */
+  ribbonY: number;
+  ribbonHeight: number;
+}
+
 export interface GraphLayout {
   width: number;
   height: number;
@@ -33,6 +55,9 @@ export interface GraphLayout {
   events: PlacedEvent[];
   /** SVG path through birth and every event, in chronological order. */
   path: string;
+  bands: ChapterBand[];
+  /** Where the chapter ribbons end (0 without chapters). */
+  ribbonBottom: number;
 }
 
 const TICK_STEPS = [1, 2, 5, 10, 20, 25, 50];
@@ -40,6 +65,22 @@ const MAX_LABEL_CHARS = 24;
 
 export const truncate = (s: string, max = MAX_LABEL_CHARS) =>
   s.length > max ? `${s.slice(0, max - 1).trimEnd()}…` : s;
+
+/** Clips chapters to the visible years and gives overlapping ones separate ribbon rows. */
+function placeChapters(periods: LifePeriod[], domain: { start: number; end: number }, now?: Date) {
+  const rowEnds: number[] = [];
+  const placed = sortPeriods(periods).flatMap((period, index) => {
+    const range = periodRange(period, now);
+    const start = Math.max(range.start, domain.start);
+    const end = Math.min(range.end, domain.end);
+    if (end <= start) return [];
+    const free = rowEnds.findIndex((rowEnd) => rowEnd <= start);
+    const row = free >= 0 ? free : rowEnds.length;
+    rowEnds[row] = end;
+    return [{ period, color: chapterColor(period, index), start, end, row }];
+  });
+  return { placed, rows: rowEnds.length };
+}
 
 export function computeLayout(
   timeline: Timeline,
@@ -50,6 +91,8 @@ export function computeLayout(
     now?: Date;
     /** Most year labels on the x axis. Default 12 (desktop); phones pass fewer. */
     maxTicks?: number;
+    /** Height of one row of chapter names above the graph. */
+    ribbonHeight?: number;
   } = {},
 ): GraphLayout {
   const width = options.width ?? GRAPH_WIDTH;
@@ -62,13 +105,18 @@ export function computeLayout(
   const latest = Math.max(
     toDecimalYear(todayAsFuzzyDate(options.now)),
     ...sorted.map((e) => toDecimalYear(e.end ?? e.start)),
+    ...timeline.periods.flatMap((p) => (p.end ? [rangeEnd(p.end)] : [])),
   );
   const end = Math.max(latest + 0.5, start + 1);
+
+  const chapters = placeChapters(timeline.periods, { start, end }, options.now);
+  const ribbonHeight = options.ribbonHeight ?? DEFAULT_RIBBON_HEIGHT;
+  const ribbonBottom = chapters.rows * ribbonHeight;
 
   const plot = {
     left: m.left,
     right: width - m.right,
-    top: m.top,
+    top: m.top + ribbonBottom,
     bottom: height - m.bottom,
     zeroY: 0,
   };
@@ -121,5 +169,17 @@ export function computeLayout(
     .map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`)
     .join(' ');
 
-  return { width, height, plot, xTicks, yTicks, birth, events, path };
+  const bands: ChapterBand[] = chapters.placed.map((c) => ({
+    id: c.period.id,
+    name: c.period.name,
+    color: c.color,
+    x: x(c.start),
+    width: x(c.end) - x(c.start),
+    y: plot.top,
+    height: plot.bottom - plot.top,
+    ribbonY: c.row * ribbonHeight,
+    ribbonHeight: ribbonHeight - 2,
+  }));
+
+  return { width, height, plot, xTicks, yTicks, birth, events, path, bands, ribbonBottom };
 }

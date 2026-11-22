@@ -186,6 +186,21 @@
     width: 100%;
   }
 
+  /* ---------- Chapters ---------- */
+
+  .section-head button {
+    width: 100%;
+  }
+
+  .chapter-list .muted {
+    flex-basis: 100%;
+  }
+
+  .chapter-swatch > span:not(.visually-hidden) {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
   /* ---------- Guided walkthrough ---------- */
 
   .wizard-nav button {

@@ -689,8 +689,15 @@ input[aria-invalid='true'] {
 }
 
 .about-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-weight: 700;
+}
+
+.about-link img {
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
 }
 
 /* ---------- Example timeline ---------- */

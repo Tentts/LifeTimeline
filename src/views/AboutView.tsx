@@ -17,7 +17,9 @@ export function AboutView({ onBack }: { onBack: () => void }) {
       <p>{t('about.creator')}</p>
       <p>{t('about.projects')}</p>
       <a className="about-link" href={GITHUB_PROFILE_URL} target="_blank" rel="noopener noreferrer">
-        {t('about.github')}
+        {/* Served from this site: the privacy policy blocks images from other hosts. */}
+        <img src={`${import.meta.env.BASE_URL}tentts-avatar.png`} alt="" width={32} height={32} />
+        <span>{t('about.github')}</span>
       </a>
     </section>
   );

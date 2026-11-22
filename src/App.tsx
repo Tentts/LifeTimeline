@@ -3,6 +3,7 @@ import { DisclaimerBanner } from './components/DisclaimerBanner';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { TimelinesProvider, useTimelines } from './state/TimelinesContext';
+import { SupportDialog } from './support/SupportDialog';
 import { HomeView } from './views/HomeView';
 import { PrivacyView } from './views/PrivacyView';
 import { TimelineView } from './views/TimelineView';
@@ -18,6 +19,7 @@ export default function App() {
 function Shell() {
   const { current } = useTimelines();
   const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showSupport, setShowSupport] = useState(false);
 
   return (
     <div className="app">
@@ -32,7 +34,11 @@ function Shell() {
           <HomeView />
         )}
       </main>
-      <Footer onShowPrivacy={() => setShowPrivacy(true)} />
+      <Footer
+        onShowPrivacy={() => setShowPrivacy(true)}
+        onShowSupport={() => setShowSupport(true)}
+      />
+      {showSupport && <SupportDialog onClose={() => setShowSupport(false)} />}
     </div>
   );
 }

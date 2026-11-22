@@ -195,6 +195,50 @@
     "deleteTitle": "¿Eliminar este capítulo?",
     "deleteBody": "«{{title}}» se eliminará. Los acontecimientos de esa época seguirán en tu línea de vida."
   },
+  "support": {
+    "footerLink": "¿Necesitas apoyo?",
+    "title": "Buscar apoyo",
+    "lead": "No tienes que cargar solo/a con los recuerdos difíciles. Hablar con alguien puede ayudar, estés o no en una crisis.",
+    "emergency": "Si tú u otra persona estáis en peligro inmediato, llama ahora al número de emergencias de tu país.",
+    "linesHeading": "Líneas de crisis",
+    "call": "Llamar al {{number}}",
+    "website": "Sitio web",
+    "emergencyNumber": "Emergencias: {{number}}",
+    "usSpanish": "Pulsa 2 para hablar en español.",
+    "regions": {
+      "us": "Estados Unidos",
+      "ca": "Canadá",
+      "ukie": "Reino Unido e Irlanda",
+      "es": "España",
+      "mx": "México",
+      "au": "Australia"
+    },
+    "otherHeading": "¿Estás en otro lugar?",
+    "otherBody": "Find A Helpline es un directorio internacional y gratuito de líneas de crisis.",
+    "otherLink": "Buscar una línea de ayuda",
+    "privacy": "Estos enlaces abren otros sitios web o la aplicación de teléfono. No se comparte con ellos nada de tu línea de vida.",
+    "checkInsToggle": "Mostrar mensajes de apoyo mientras trabajo"
+  },
+  "checkIn": {
+    "title": "¿Cómo estás?",
+    "body": "Volver a los momentos difíciles requiere energía. Tu trabajo está guardado, así que puedes parar cuando lo necesites.",
+    "keepGoing": "Seguir",
+    "takeBreak": "Tomar un descanso",
+    "findSupport": "Buscar apoyo",
+    "stop": "No mostrar estos mensajes",
+    "breakTitle": "Tómate un momento",
+    "breakIntro": "Si te ayuda, lleva tu atención a lo que te rodea. Fíjate en:",
+    "steps": {
+      "see": "5 cosas que puedas ver",
+      "touch": "4 cosas que puedas tocar",
+      "hear": "3 cosas que puedas oír",
+      "smell": "2 cosas que puedas oler",
+      "taste": "1 cosa que puedas saborear"
+    },
+    "breathe": "Después respira despacio unas cuantas veces, alargando un poco cada exhalación.",
+    "saved": "Todo está guardado en este navegador. Puedes cerrar esta página y volver cuando quieras.",
+    "ready": "Estoy listo/a para continuar"
+  },
   "reflection": {
     "button": "Reflexionar",
     "back": "Volver a la línea de vida",

@@ -130,13 +130,13 @@ The same message is also available any time from a "Privacy" link in the footer.
 - **Export `.tl`** and **Open `.tl`**, with validation and clear error messages.
 - **Export PNG** (graph) and **Export PDF** (graph plus chronological event list).
 
-### Phase 2 — Guided experience
+### Phase 2 — Guided experience ✅ done
 
 - ✅ Step-by-step wizard (birth → childhood → adolescence → adulthood → present) with prompts
   inspired by the Lifeline and McAdams Life Story Interview.
 - ✅ Chapters/periods as background bands on the graph.
 - ✅ Turning points highlighted; reflection page with guided questions.
-- Safety features: "take a break" prompts, crisis-resources page.
+- ✅ Safety features: "take a break" prompts, crisis-resources page.
 
 ### Phase 3 — Views & sharing
 

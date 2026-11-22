@@ -21,6 +21,7 @@ where you left off.
 - [Development plan](docs/DEVELOPMENT_PLAN.md)
 - [Translating](docs/TRANSLATING.md)
 - [`.tl` file format](docs/FILE_FORMAT.md)
+- [Development workflow (branches and releases)](docs/WORKFLOW.md)
 
 ## Development
 
@@ -37,7 +38,10 @@ npm run preview      # serve dist/ at /LifeTimeline/ like GitHub Pages
 
 ## Deployment
 
-Every push to `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml), which lints,
-tests, builds and publishes `dist/` to GitHub Pages.
+Day-to-day work happens on `feat/<name>` branches merged into `dev`; releases are merges of `dev`
+into `main` (see [docs/WORKFLOW.md](docs/WORKFLOW.md)).
+
+[`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) lints, tests and builds every branch.
+Only pushes to `main` publish `dist/` to GitHub Pages.
 
 One-time setup on GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.

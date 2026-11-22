@@ -1,10 +1,11 @@
-# Builds the static site and publishes it to GitHub Pages.
+# Checks every branch; publishes to GitHub Pages only from `main` (= a release).
+# Branch workflow: feat/<name> → dev → main. See docs/WORKFLOW.md.
 # One-time setup: repo Settings → Pages → Build and deployment → Source: "GitHub Actions".
-name: Deploy to GitHub Pages
+name: CI and deploy
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev, 'feat/**']
   pull_request:
   workflow_dispatch:
 
@@ -13,9 +14,10 @@ permissions:
   pages: write
   id-token: write
 
+# One run per branch; a newer push cancels an older check run, but never a release.
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   build:
@@ -32,14 +34,18 @@ jobs:
       - run: npm test
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
-        if: github.event_name != 'pull_request'
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
           path: dist
 
   deploy:
-    if: github.event_name != 'pull_request'
+    # Only main publishes the site. dev and feat/* branches are checked but never deployed.
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

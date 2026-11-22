@@ -165,6 +165,207 @@
     "emptyShort": "Add your first event to start.",
     "tapHint": "Tap a point on the line to see that event."
   },
+  "chapters": {
+    "heading": "Chapters",
+    "add": "Add chapter",
+    "empty": "If your life were a book, what would its chapters be? Add periods like “University years” or “Living abroad” to see them on your lifeline.",
+    "createTitle": "Add a chapter",
+    "editTitle": "Edit chapter",
+    "hint": "A chapter is a period of your life that belongs together. Chapters can overlap.",
+    "name": "Chapter name",
+    "namePlaceholder": "e.g. University years",
+    "nameRequired": "Please give this chapter a name.",
+    "start": "From",
+    "end": "Until",
+    "ongoing": "This chapter is still going on",
+    "today": "today",
+    "color": "Colour",
+    "colors": {
+      "pink": "Pink",
+      "blue": "Blue",
+      "violet": "Violet",
+      "teal": "Teal",
+      "amber": "Amber",
+      "slate": "Slate"
+    },
+    "errors": {
+      "endBeforeStart": "A chapter can’t end before it starts.",
+      "beforeBirth": "This chapter ends before your date of birth."
+    },
+    "deleteTitle": "Delete this chapter?",
+    "deleteBody": "“{{title}}” will be removed. The events from that time stay on your timeline."
+  },
+  "support": {
+    "footerLink": "Need support?",
+    "title": "Find support",
+    "lead": "You don’t have to carry difficult memories alone. Talking to someone can help, whether or not you’re in crisis.",
+    "emergency": "If you or someone else is in immediate danger, call your local emergency number now.",
+    "linesHeading": "Crisis lines",
+    "call": "Call {{number}}",
+    "website": "Website",
+    "emergencyNumber": "Emergency: {{number}}",
+    "usSpanish": "Press 2 for Spanish.",
+    "regions": {
+      "us": "United States",
+      "ca": "Canada",
+      "ukie": "United Kingdom and Ireland",
+      "es": "Spain",
+      "mx": "Mexico",
+      "au": "Australia"
+    },
+    "otherHeading": "Somewhere else?",
+    "otherBody": "Find A Helpline is a free international directory of crisis lines.",
+    "otherLink": "Find a helpline",
+    "privacy": "These links open other websites or your phone app. Nothing from your timeline is shared with them.",
+    "checkInsToggle": "Show gentle check-ins while I work"
+  },
+  "checkIn": {
+    "title": "How are you doing?",
+    "body": "Going back to difficult moments takes energy. Your work is saved, so you can pause whenever you need to.",
+    "keepGoing": "Keep going",
+    "takeBreak": "Take a break",
+    "findSupport": "Find support",
+    "stop": "Don’t show these check-ins",
+    "breakTitle": "Take a moment",
+    "breakIntro": "If it helps, bring your attention back to the room around you. Notice:",
+    "steps": {
+      "see": "5 things you can see",
+      "touch": "4 things you can touch",
+      "hear": "3 things you can hear",
+      "smell": "2 things you can smell",
+      "taste": "1 thing you can taste"
+    },
+    "breathe": "Then take a few slow breaths, letting each breath out last a little longer than the one before.",
+    "saved": "Everything is saved in this browser. You can close this page and come back any time.",
+    "ready": "I’m ready to continue"
+  },
+  "reflection": {
+    "button": "Reflect",
+    "back": "Back to timeline",
+    "heading": "Reflect on your story",
+    "intro": "Take a step back and look at your lifeline as a whole. There’s nothing you have to answer here.",
+    "glanceHeading": "Your story at a glance",
+    "events": "Events",
+    "chapters": "Chapters",
+    "highPoint": "Highest point",
+    "lowPoint": "Lowest point",
+    "none": "Not marked yet",
+    "turningPointsHeading": "Turning points",
+    "noTurningPoints": "No turning points marked yet. You can mark one on any event.",
+    "questionsHeading": "Questions to sit with",
+    "questionsHint": "Answer any, all or none, in your own words.",
+    "questions": {
+      "themes": "Is there a theme that runs through your story?",
+      "strengths": "What or who helped you through the hardest times?",
+      "turningPoints": "How did your turning points change you?",
+      "patterns": "Do you notice any patterns you hadn’t seen before?",
+      "values": "What matters most to you now?",
+      "nextChapter": "What would you like the next chapter to hold?"
+    },
+    "notes": "Anything else you’d like to remember",
+    "saved": "Your answers are saved automatically in this browser only, and included in your .tl and PDF exports."
+  },
+  "wizard": {
+    "title": "Guided walkthrough",
+    "startButton": "Guided walkthrough",
+    "continueButton": "Continue walkthrough",
+    "progress": "Step {{current}} of {{total}}",
+    "start": "Start",
+    "next": "Next",
+    "back": "Back",
+    "done": "Finish",
+    "notNow": "Not now",
+    "takeBreak": "Take a break",
+    "gentle": "If a memory feels too heavy, it’s okay to leave it out, or to add just a short title. You can always come back to it later, or talk it through with someone you trust.",
+    "gentleShort": "Add only what feels right. Skipping a period is completely fine.",
+    "promptsIntro": "Some questions that may help memories come back:",
+    "addFromStage": "Add an event from this time",
+    "onTimeline": "On your timeline from this time",
+    "nothingYet": "Nothing from this time yet.",
+    "stageRange": "Ages {{from}}–{{to}} · {{startYear}}–{{endYear}}",
+    "stageRangeCurrent": "Age {{from}} to today · {{startYear}}–today",
+    "cta": {
+      "heading": "Not sure where to start?",
+      "body": "The guided walkthrough takes you through your life one period at a time, with a few questions to help memories come back."
+    },
+    "intro": {
+      "heading": "Let’s walk through your life together",
+      "body": "We’ll go one period at a time, from your earliest years to today. Each step has a few questions to help memories come back. Add as many or as few events as you like: everything you add appears on your lifeline straight away.",
+      "pace": "There’s no right or wrong answer and no need to finish in one go. You can skip any step, go back, or take a break and continue later."
+    },
+    "stages": {
+      "earlyChildhood": {
+        "title": "Early childhood",
+        "p1": "What is your earliest memory?",
+        "p2": "Who took care of you? Where did you live?",
+        "p3": "Was there a move, a new brother or sister, or a loss in the family?"
+      },
+      "childhood": {
+        "title": "Childhood",
+        "p1": "What do you remember about starting school?",
+        "p2": "Who were your friends, and what did you love doing?",
+        "p3": "Were there moments when you felt especially proud, or especially scared or alone?"
+      },
+      "adolescence": {
+        "title": "Adolescence",
+        "p1": "Which people or experiences shaped who you were becoming?",
+        "p2": "Think of firsts: a first love, a first job, a first big decision.",
+        "p3": "Were there conflicts, losses or big changes at home or at school?"
+      },
+      "youngAdulthood": {
+        "title": "Young adulthood",
+        "p1": "Did you study, start working, or move somewhere new?",
+        "p2": "Which important relationships began or ended?",
+        "p3": "What were you hoping your life would become?"
+      },
+      "adulthood": {
+        "title": "Adulthood",
+        "p1": "What were the big commitments: work, a partner, children, a home?",
+        "p2": "What challenges tested you, and what helped you through them?",
+        "p3": "When did you feel most like yourself?"
+      },
+      "midlife": {
+        "title": "Midlife",
+        "p1": "What changed in your work, your family or your health?",
+        "p2": "Were there losses, or new beginnings?",
+        "p3": "What have you come to value more over the years?"
+      },
+      "laterLife": {
+        "title": "Later life",
+        "p1": "What has this stage of life brought you?",
+        "p2": "Which people have been most important to you?",
+        "p3": "Which moments from these years would you like to remember?"
+      }
+    },
+    "keyMoments": {
+      "heading": "Key moments",
+      "intro": "Looking back over your whole life so far, a few moments often stand out. Add them if they’re not on your timeline yet.",
+      "existing": "Already on your timeline: {{titles}}",
+      "high": {
+        "title": "A high point",
+        "prompt": "A moment of great joy, pride or peace. What happened, and who was there?",
+        "add": "Add a high point"
+      },
+      "low": {
+        "title": "A low point",
+        "prompt": "One of the hardest times. Only add it if you feel ready; a short title is enough.",
+        "add": "Add a low point"
+      },
+      "turning": {
+        "title": "A turning point",
+        "prompt": "A moment when something in you or in your life changed direction.",
+        "add": "Add a turning point"
+      }
+    },
+    "finish": {
+      "heading": "You’ve walked through your whole timeline",
+      "added_one": "You added {{count}} event during this walkthrough.",
+      "added_other": "You added {{count}} events during this walkthrough.",
+      "reflect": "Take a moment to look at your lifeline. Which turning points stand out? What helped you through the low points? Are there patterns you hadn’t noticed before?",
+      "backup": "Your timeline is saved only in this browser. Export a .tl file to keep a backup.",
+      "export": "Export a backup"
+    }
+  },
   "export": {
     "title": "Export timeline",
     "localOnly": "Files are created on your device and downloaded directly. Nothing is uploaded.",

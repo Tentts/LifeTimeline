@@ -1,12 +1,21 @@
 import { useTranslation } from 'react-i18next';
 
-export function Footer({ onShowPrivacy }: { onShowPrivacy: () => void }) {
+export function Footer({
+  onShowPrivacy,
+  onShowSupport,
+}: {
+  onShowPrivacy: () => void;
+  onShowSupport: () => void;
+}) {
   const { t } = useTranslation();
 
   return (
     <footer className="app-footer">
       <p>{t('footer.privacy')}</p>
       <nav className="footer-links">
+        <button type="button" className="link-button footer-support" onClick={onShowSupport}>
+          {t('support.footerLink')}
+        </button>
         <button type="button" className="link-button" onClick={onShowPrivacy}>
           {t('footer.privacyLink')}
         </button>

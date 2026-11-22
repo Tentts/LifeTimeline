@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ChaptersSection } from '../components/ChaptersSection';
 import { CompactGraphSection } from '../components/CompactGraphSection';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import { COMPACT_BREAKPOINT } from '../graph/CompactLifelineGraph';
@@ -14,8 +15,14 @@ import { SCREEN_PALETTE } from '../graph/palette';
 import { emptyEventDraft, newId, type EventDraft } from '../model/factory';
 import type { LifeEvent, Timeline } from '../model/schema';
 import { useTimelines } from '../state/TimelinesContext';
+import { CheckInDialog } from '../support/CheckInDialog';
+import { checkInsEnabled, shouldCheckIn } from '../support/checkIn';
+import { SupportDialog } from '../support/SupportDialog';
+import { GuidedWizard } from '../wizard/GuidedWizard';
+import { loadProgress } from '../wizard/stages';
+import { ReflectionView } from './ReflectionView';
 
-type Editing = { mode: 'create' } | { mode: 'edit'; event: LifeEvent };
+type Editing = { mode: 'create'; initial?: EventDraft } | { mode: 'edit'; event: LifeEvent };
 
 const withoutId = ({ id: _id, ...draft }: LifeEvent): EventDraft => draft;
 
@@ -26,6 +33,17 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
   const [deleting, setDeleting] = useState<LifeEvent | null>(null);
   const [editingDetails, setEditingDetails] = useState(false);
   const [exporting, setExporting] = useState(false);
+  const [guiding, setGuiding] = useState(false);
+  const [reflecting, setReflecting] = useState(false);
+  const [checkingIn, setCheckingIn] = useState(false);
+  const [showSupport, setShowSupport] = useState(false);
+  const [openedAt] = useState(() => Date.now());
+  const lastCheckIn = useRef<number | null>(null);
+  const openReflection = () => {
+    setGuiding(false);
+    setReflecting(true);
+  };
+  const hasWizardProgress = !guiding && loadProgress(timeline.id) !== null;
   const locale = i18n.resolvedLanguage ?? 'en';
   // Phones get the compact graph; everything wider keeps the desktop graph unchanged.
   const graphRef = useRef<HTMLDivElement>(null);
@@ -39,6 +57,20 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
 
   const saveEvent = (draft: EventDraft) => {
     if (!editing) return;
+    const now = Date.now();
+    if (
+      checkInsEnabled() &&
+      shouldCheckIn({
+        previousValence: editing.mode === 'edit' ? editing.event.valence : undefined,
+        valence: draft.valence,
+        openedAt,
+        lastCheckInAt: lastCheckIn.current,
+        now,
+      })
+    ) {
+      lastCheckIn.current = now;
+      setCheckingIn(true);
+    }
     if (editing.mode === 'create') {
       update((tl) => ({ ...tl, events: [...tl.events, { ...draft, id: newId() }] }));
     } else {
@@ -79,8 +111,49 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
           <button type="button" className="secondary" onClick={() => setEditingDetails(true)}>
             {t('timeline.editDetails')}
           </button>
+          {!guiding && (
+            <button
+              type="button"
+              className="secondary"
+              onClick={() => {
+                setReflecting(false);
+                setGuiding(true);
+              }}
+            >
+              {t(hasWizardProgress ? 'wizard.continueButton' : 'wizard.startButton')}
+            </button>
+          )}
+          {!reflecting && (
+            <button type="button" className="secondary" onClick={openReflection}>
+              {t('reflection.button')}
+            </button>
+          )}
         </div>
       </section>
+
+      {guiding ? (
+        <GuidedWizard
+          timeline={timeline}
+          onAddEvent={(draft) => setEditing({ mode: 'create', initial: draft })}
+          onEditEvent={editEvent}
+          onExport={() => setExporting(true)}
+          onReflect={openReflection}
+          onClose={() => setGuiding(false)}
+        />
+      ) : (
+        !reflecting &&
+        timeline.events.length === 0 && (
+          <section className="card wizard-cta">
+            <div>
+              <h3>{t('wizard.cta.heading')}</h3>
+              <p>{t('wizard.cta.body')}</p>
+            </div>
+            <button type="button" onClick={() => setGuiding(true)}>
+              {t('wizard.startButton')}
+            </button>
+          </section>
+        )
+      )}
 
       <section className="card">
         <h3 className="visually-hidden">{t('timeline.graphHeading')}</h3>
@@ -94,10 +167,22 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
         <p className="hint">{t('timeline.savedLocally')}</p>
       </section>
 
-      <section className="card">
-        <h3>{t('timeline.eventsHeading')}</h3>
-        <EventList timeline={timeline} onEdit={editEvent} />
-      </section>
+      {reflecting ? (
+        <ReflectionView
+          timeline={timeline}
+          onBack={() => setReflecting(false)}
+          onEditEvent={editEvent}
+        />
+      ) : (
+        <>
+          <ChaptersSection timeline={timeline} />
+
+          <section className="card">
+            <h3>{t('timeline.eventsHeading')}</h3>
+            <EventList timeline={timeline} onEdit={editEvent} />
+          </section>
+        </>
+      )}
 
       {editing && (
         <EventDialog
@@ -105,7 +190,7 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
           initial={
             editing.mode === 'edit'
               ? withoutId(editing.event)
-              : emptyEventDraft({ year: new Date().getFullYear() })
+              : (editing.initial ?? emptyEventDraft({ year: new Date().getFullYear() }))
           }
           onCancel={() => setEditing(null)}
           onSubmit={saveEvent}
@@ -157,6 +242,17 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
       )}
 
       {exporting && <ExportDialog timeline={timeline} onClose={() => setExporting(false)} />}
+
+      {checkingIn && (
+        <CheckInDialog
+          onClose={() => setCheckingIn(false)}
+          onFindSupport={() => {
+            setCheckingIn(false);
+            setShowSupport(true);
+          }}
+        />
+      )}
+      {showSupport && <SupportDialog onClose={() => setShowSupport(false)} />}
     </div>
   );
 }

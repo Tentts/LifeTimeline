@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import type { EventSymbol, Timeline } from '../model/schema';
+import { ChapterBands } from './ChapterBands';
 import { computeLayout, truncate, type GraphLayout, type PlacedEvent } from './layout';
 import { mixHex, type GraphPalette } from './palette';
 
@@ -97,6 +98,7 @@ export function LifelineGraph({
         </linearGradient>
       </defs>
       <rect x={0} y={0} width={width} height={height} style={{ fill: p.background }} />
+      <ChapterBands bands={layout.bands} textColor={p.text} />
 
       {/* Grid and axes */}
       {layout.xTicks.map((tick) => (

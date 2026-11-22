@@ -10,6 +10,7 @@
  */
 import { useTranslation } from 'react-i18next';
 import type { Timeline } from '../model/schema';
+import { ChapterBands } from './ChapterBands';
 import { computeLayout, truncate, type GraphMargins } from './layout';
 import { SymbolShape } from './LifelineGraph';
 import { SCREEN_PALETTE as p } from './palette';
@@ -38,6 +39,7 @@ export function CompactLifelineGraph({ timeline, width, selectedId, onSelect, no
     height: COMPACT_HEIGHT,
     margins: COMPACT_MARGINS,
     maxTicks: Math.max(2, Math.floor(plotWidth / 60)),
+    ribbonHeight: 16,
   });
   const { height, plot } = layout;
   const colorFor = (valence: number) =>
@@ -77,6 +79,7 @@ export function CompactLifelineGraph({ timeline, width, selectedId, onSelect, no
         style={{ fill: 'transparent' }}
         onClick={() => onSelect(null)}
       />
+      <ChapterBands bands={layout.bands} textColor={p.text} fontSize={10} />
 
       {layout.xTicks.map((tick) => (
         <g key={tick.year} pointerEvents="none">
@@ -228,7 +231,7 @@ export function CompactLifelineGraph({ timeline, width, selectedId, onSelect, no
             {selected && (
               <text
                 x={label.x}
-                y={Math.max(label.y, 12)}
+                y={Math.max(label.y, layout.ribbonBottom + 12)}
                 textAnchor={label.anchor}
                 fontSize={12}
                 fontWeight="bold"

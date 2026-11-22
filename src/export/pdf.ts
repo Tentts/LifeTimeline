@@ -1,11 +1,16 @@
 import type { TFunction } from 'i18next';
 import { jsPDF } from 'jspdf';
 import { svg2pdf } from 'svg2pdf.js';
-import { formatDateLabel, formatEventWhen } from '../components/useEventDateLabel';
+import {
+  formatDateLabel,
+  formatEventWhen,
+  formatPeriodRange,
+} from '../components/useEventDateLabel';
 import { formatValence, valenceKey } from '../components/valence';
 import { GRAPH_HEIGHT, GRAPH_WIDTH } from '../graph/layout';
 import { sortEvents } from '../model/factory';
-import type { Timeline } from '../model/schema';
+import { chapterColor, sortPeriods } from '../model/periods';
+import { REFLECTION_QUESTIONS, type Timeline } from '../model/schema';
 import { renderGraphSvg } from './graphSvg';
 
 const PAGE = { width: 297, height: 210, margin: 14 }; // A4 landscape, mm
@@ -24,14 +29,54 @@ export async function buildPdf(timeline: Timeline, t: TFunction, locale: string)
   await drawSvg(doc, renderGraphSvg(timeline), PAGE.margin, 34, contentWidth, graphHeight);
   footer(doc, t);
 
-  // Following pages: events
+  // Following pages: chapters, then events
   const events = sortEvents(timeline.events);
-  if (events.length > 0) {
+  const periods = sortPeriods(timeline.periods);
+  const reflections = [
+    ...REFLECTION_QUESTIONS.map((id) => ({
+      question: t(`reflection.questions.${id}`),
+      answer: timeline.reflectionAnswers?.[id]?.trim(),
+    })),
+    { question: t('reflection.notes'), answer: timeline.reflection?.trim() },
+  ].filter((item): item is { question: string; answer: string } => Boolean(item.answer));
+  if (events.length > 0 || periods.length > 0 || reflections.length > 0) {
     doc.addPage();
     let y = PAGE.margin + 4;
-    doc.setFont('helvetica', 'bold').setFontSize(14).setTextColor(COLORS.primary);
-    doc.text(t('pdf.eventsHeading'), PAGE.margin, y);
-    y += 8;
+    const pageBottom = PAGE.height - PAGE.margin - 6;
+    const newPage = () => {
+      footer(doc, t);
+      doc.addPage();
+      y = PAGE.margin + 4;
+    };
+
+    if (periods.length > 0) {
+      doc.setFont('helvetica', 'bold').setFontSize(14).setTextColor(COLORS.primary);
+      doc.text(t('chapters.heading'), PAGE.margin, y);
+      y += 8;
+      periods.forEach((period, index) => {
+        doc.setFont('helvetica', 'bold').setFontSize(11);
+        const rows = doc.splitTextToSize(period.name, contentWidth - 6) as string[];
+        if (y + rows.length * 5 + 5 > pageBottom) newPage();
+        doc.setFillColor(chapterColor(period, index));
+        doc.rect(PAGE.margin, y - 3, 3, 3, 'F');
+        doc.setTextColor(COLORS.text);
+        for (const row of rows) {
+          doc.text(row, PAGE.margin + 6, y);
+          y += 5;
+        }
+        doc.setFont('helvetica', 'normal').setFontSize(9).setTextColor(COLORS.muted);
+        doc.text(formatPeriodRange(t, locale, period), PAGE.margin + 6, y);
+        y += 7;
+      });
+      y += 3;
+    }
+
+    if (events.length > 0) {
+      if (y + 20 > pageBottom) newPage();
+      doc.setFont('helvetica', 'bold').setFontSize(14).setTextColor(COLORS.primary);
+      doc.text(t('pdf.eventsHeading'), PAGE.margin, y);
+      y += 8;
+    }
 
     for (const event of events) {
       const lines: {
@@ -71,11 +116,7 @@ export async function buildPdf(timeline: Timeline, t: TFunction, locale: string)
       });
       const blockHeight = wrapped.reduce((h, l) => h + l.rows.length * l.size * 0.45, 0) + 5;
 
-      if (y + blockHeight > PAGE.height - PAGE.margin - 6) {
-        footer(doc, t);
-        doc.addPage();
-        y = PAGE.margin + 4;
-      }
+      if (y + blockHeight > pageBottom) newPage();
       for (const line of wrapped) {
         doc.setFont('helvetica', line.style).setFontSize(line.size).setTextColor(line.color);
         for (const row of line.rows) {
@@ -86,6 +127,31 @@ export async function buildPdf(timeline: Timeline, t: TFunction, locale: string)
       y += 3;
       doc.setDrawColor(COLORS.rule).line(PAGE.margin, y, PAGE.width - PAGE.margin, y);
       y += 3;
+    }
+
+    if (reflections.length > 0) {
+      if (y + 25 > pageBottom) newPage();
+      y += 3;
+      doc.setFont('helvetica', 'bold').setFontSize(14).setTextColor(COLORS.primary);
+      doc.text(t('reflection.heading'), PAGE.margin, y);
+      y += 8;
+      const writeRows = (text: string, style: 'bold' | 'normal') => {
+        doc.setFont('helvetica', style).setFontSize(10).setTextColor(COLORS.text);
+        for (const row of doc.splitTextToSize(text, contentWidth) as string[]) {
+          if (y + 5 > pageBottom) {
+            newPage();
+            doc.setFont('helvetica', style).setFontSize(10).setTextColor(COLORS.text);
+          }
+          doc.text(row, PAGE.margin, y);
+          y += 5;
+        }
+      };
+      for (const { question, answer } of reflections) {
+        if (y + 12 > pageBottom) newPage();
+        writeRows(question, 'bold');
+        writeRows(answer, 'normal');
+        y += 3;
+      }
     }
     footer(doc, t);
   }

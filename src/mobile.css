@@ -131,6 +131,8 @@
   .modal,
   .modal-wide {
     max-width: none;
+    /* Grow with the content, so long dialogs keep their background while scrolling. */
+    align-self: flex-start;
     min-height: 100dvh;
     border-radius: 0;
     display: flex;
@@ -183,6 +185,45 @@
 
   .export-options button {
     min-width: 0;
+    width: 100%;
+  }
+
+  /* ---------- Support ---------- */
+
+  .crisis-actions a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* ---------- Chapters ---------- */
+
+  .section-head button {
+    width: 100%;
+  }
+
+  .chapter-list .muted {
+    flex-basis: 100%;
+  }
+
+  .chapter-swatch > span:not(.visually-hidden) {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  /* ---------- Guided walkthrough ---------- */
+
+  .wizard-nav button {
+    flex: 1 1 auto;
+  }
+
+  .wizard-break {
+    margin-left: 0;
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .wizard-cta button {
     width: 100%;
   }
 }

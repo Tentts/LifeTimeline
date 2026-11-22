@@ -195,6 +195,32 @@
     "deleteTitle": "¿Eliminar este capítulo?",
     "deleteBody": "«{{title}}» se eliminará. Los acontecimientos de esa época seguirán en tu línea de vida."
   },
+  "reflection": {
+    "button": "Reflexionar",
+    "back": "Volver a la línea de vida",
+    "heading": "Reflexiona sobre tu historia",
+    "intro": "Da un paso atrás y mira tu línea de vida en conjunto. Aquí no hay nada que tengas que responder.",
+    "glanceHeading": "Tu historia de un vistazo",
+    "events": "Acontecimientos",
+    "chapters": "Capítulos",
+    "highPoint": "Punto más alto",
+    "lowPoint": "Punto más bajo",
+    "none": "Sin marcar todavía",
+    "turningPointsHeading": "Puntos de inflexión",
+    "noTurningPoints": "Aún no has marcado puntos de inflexión. Puedes marcar uno en cualquier acontecimiento.",
+    "questionsHeading": "Preguntas para pensar con calma",
+    "questionsHint": "Responde a las que quieras, a todas o a ninguna, con tus propias palabras.",
+    "questions": {
+      "themes": "¿Hay algún tema que recorra toda tu historia?",
+      "strengths": "¿Qué o quién te ayudó en los momentos más difíciles?",
+      "turningPoints": "¿Cómo te cambiaron tus puntos de inflexión?",
+      "patterns": "¿Notas algún patrón que no habías visto antes?",
+      "values": "¿Qué es lo que más te importa ahora?",
+      "nextChapter": "¿Qué te gustaría que trajera el próximo capítulo?"
+    },
+    "notes": "Cualquier otra cosa que quieras recordar",
+    "saved": "Tus respuestas se guardan automáticamente solo en este navegador y se incluyen en tus exportaciones .tl y PDF."
+  },
   "wizard": {
     "title": "Recorrido guiado",
     "startButton": "Recorrido guiado",

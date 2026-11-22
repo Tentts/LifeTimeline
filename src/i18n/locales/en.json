@@ -195,6 +195,32 @@
     "deleteTitle": "Delete this chapter?",
     "deleteBody": "“{{title}}” will be removed. The events from that time stay on your timeline."
   },
+  "reflection": {
+    "button": "Reflect",
+    "back": "Back to timeline",
+    "heading": "Reflect on your story",
+    "intro": "Take a step back and look at your lifeline as a whole. There’s nothing you have to answer here.",
+    "glanceHeading": "Your story at a glance",
+    "events": "Events",
+    "chapters": "Chapters",
+    "highPoint": "Highest point",
+    "lowPoint": "Lowest point",
+    "none": "Not marked yet",
+    "turningPointsHeading": "Turning points",
+    "noTurningPoints": "No turning points marked yet. You can mark one on any event.",
+    "questionsHeading": "Questions to sit with",
+    "questionsHint": "Answer any, all or none, in your own words.",
+    "questions": {
+      "themes": "Is there a theme that runs through your story?",
+      "strengths": "What or who helped you through the hardest times?",
+      "turningPoints": "How did your turning points change you?",
+      "patterns": "Do you notice any patterns you hadn’t seen before?",
+      "values": "What matters most to you now?",
+      "nextChapter": "What would you like the next chapter to hold?"
+    },
+    "notes": "Anything else you’d like to remember",
+    "saved": "Your answers are saved automatically in this browser only, and included in your .tl and PDF exports."
+  },
   "wizard": {
     "title": "Guided walkthrough",
     "startButton": "Guided walkthrough",

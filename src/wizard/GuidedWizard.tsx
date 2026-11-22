@@ -19,6 +19,7 @@ interface Props {
   onAddEvent: (draft: EventDraft) => void;
   onEditEvent: (id: string) => void;
   onExport: () => void;
+  onReflect: () => void;
   onClose: () => void;
 }
 
@@ -27,7 +28,14 @@ interface Props {
  * Events are added to the timeline as you go, so the lifeline below grows step by step.
  * Progress is remembered in this browser so the user can take a break and continue later.
  */
-export function GuidedWizard({ timeline, onAddEvent, onEditEvent, onExport, onClose }: Props) {
+export function GuidedWizard({
+  timeline,
+  onAddEvent,
+  onEditEvent,
+  onExport,
+  onReflect,
+  onClose,
+}: Props) {
   const { t } = useTranslation();
   const steps = useMemo(() => wizardSteps(timeline.person.birthDate), [timeline.person.birthDate]);
   const [storedIndex, setIndex] = useState(() => {
@@ -122,6 +130,16 @@ export function GuidedWizard({ timeline, onAddEvent, onEditEvent, onExport, onCl
           <div className="actions">
             <button type="button" className="secondary" onClick={onExport}>
               {t('wizard.finish.export')}
+            </button>
+            <button
+              type="button"
+              className="secondary"
+              onClick={() => {
+                saveProgress(timeline.id, null);
+                onReflect();
+              }}
+            >
+              {t('reflection.button')}
             </button>
           </div>
         </>

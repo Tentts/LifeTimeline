@@ -17,6 +17,7 @@ import type { LifeEvent, Timeline } from '../model/schema';
 import { useTimelines } from '../state/TimelinesContext';
 import { GuidedWizard } from '../wizard/GuidedWizard';
 import { loadProgress } from '../wizard/stages';
+import { ReflectionView } from './ReflectionView';
 
 type Editing = { mode: 'create'; initial?: EventDraft } | { mode: 'edit'; event: LifeEvent };
 
@@ -30,6 +31,11 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
   const [editingDetails, setEditingDetails] = useState(false);
   const [exporting, setExporting] = useState(false);
   const [guiding, setGuiding] = useState(false);
+  const [reflecting, setReflecting] = useState(false);
+  const openReflection = () => {
+    setGuiding(false);
+    setReflecting(true);
+  };
   const hasWizardProgress = !guiding && loadProgress(timeline.id) !== null;
   const locale = i18n.resolvedLanguage ?? 'en';
   // Phones get the compact graph; everything wider keeps the desktop graph unchanged.
@@ -85,8 +91,20 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
             {t('timeline.editDetails')}
           </button>
           {!guiding && (
-            <button type="button" className="secondary" onClick={() => setGuiding(true)}>
+            <button
+              type="button"
+              className="secondary"
+              onClick={() => {
+                setReflecting(false);
+                setGuiding(true);
+              }}
+            >
               {t(hasWizardProgress ? 'wizard.continueButton' : 'wizard.startButton')}
+            </button>
+          )}
+          {!reflecting && (
+            <button type="button" className="secondary" onClick={openReflection}>
+              {t('reflection.button')}
             </button>
           )}
         </div>
@@ -98,9 +116,11 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
           onAddEvent={(draft) => setEditing({ mode: 'create', initial: draft })}
           onEditEvent={editEvent}
           onExport={() => setExporting(true)}
+          onReflect={openReflection}
           onClose={() => setGuiding(false)}
         />
       ) : (
+        !reflecting &&
         timeline.events.length === 0 && (
           <section className="card wizard-cta">
             <div>
@@ -126,12 +146,22 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
         <p className="hint">{t('timeline.savedLocally')}</p>
       </section>
 
-      <ChaptersSection timeline={timeline} />
+      {reflecting ? (
+        <ReflectionView
+          timeline={timeline}
+          onBack={() => setReflecting(false)}
+          onEditEvent={editEvent}
+        />
+      ) : (
+        <>
+          <ChaptersSection timeline={timeline} />
 
-      <section className="card">
-        <h3>{t('timeline.eventsHeading')}</h3>
-        <EventList timeline={timeline} onEdit={editEvent} />
-      </section>
+          <section className="card">
+            <h3>{t('timeline.eventsHeading')}</h3>
+            <EventList timeline={timeline} onEdit={editEvent} />
+          </section>
+        </>
+      )}
 
       {editing && (
         <EventDialog

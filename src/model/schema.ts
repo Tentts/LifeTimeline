@@ -46,6 +46,27 @@ export const lifePeriodSchema = z.object({
     .optional(),
 });
 
+/** Guided questions on the reflection page (wording in the locale files). */
+export const REFLECTION_QUESTIONS = [
+  'themes',
+  'strengths',
+  'turningPoints',
+  'patterns',
+  'values',
+  'nextChapter',
+] as const;
+
+const answer = () => text(20_000).optional();
+
+export const reflectionAnswersSchema = z.object({
+  themes: answer(),
+  strengths: answer(),
+  turningPoints: answer(),
+  patterns: answer(),
+  values: answer(),
+  nextChapter: answer(),
+});
+
 export const timelineSchema = z.object({
   id: z.string().min(1),
   title: text(200).trim().min(1),
@@ -56,6 +77,7 @@ export const timelineSchema = z.object({
   events: z.array(lifeEventSchema).max(5000),
   periods: z.array(lifePeriodSchema).max(500).default([]),
   reflection: text(50_000).optional(),
+  reflectionAnswers: reflectionAnswersSchema.optional(),
   createdAt: z.iso.datetime(),
   updatedAt: z.iso.datetime(),
 });
@@ -64,3 +86,4 @@ export type LifeEvent = z.infer<typeof lifeEventSchema>;
 export type LifePeriod = z.infer<typeof lifePeriodSchema>;
 export type Timeline = z.infer<typeof timelineSchema>;
 export type EventSymbol = (typeof SYMBOLS)[number];
+export type ReflectionQuestion = (typeof REFLECTION_QUESTIONS)[number];

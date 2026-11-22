@@ -10,7 +10,7 @@ import { formatValence, valenceKey } from '../components/valence';
 import { GRAPH_HEIGHT, GRAPH_WIDTH } from '../graph/layout';
 import { sortEvents } from '../model/factory';
 import { chapterColor, sortPeriods } from '../model/periods';
-import type { Timeline } from '../model/schema';
+import { REFLECTION_QUESTIONS, type Timeline } from '../model/schema';
 import { renderGraphSvg } from './graphSvg';
 
 const PAGE = { width: 297, height: 210, margin: 14 }; // A4 landscape, mm
@@ -32,7 +32,14 @@ export async function buildPdf(timeline: Timeline, t: TFunction, locale: string)
   // Following pages: chapters, then events
   const events = sortEvents(timeline.events);
   const periods = sortPeriods(timeline.periods);
-  if (events.length > 0 || periods.length > 0) {
+  const reflections = [
+    ...REFLECTION_QUESTIONS.map((id) => ({
+      question: t(`reflection.questions.${id}`),
+      answer: timeline.reflectionAnswers?.[id]?.trim(),
+    })),
+    { question: t('reflection.notes'), answer: timeline.reflection?.trim() },
+  ].filter((item): item is { question: string; answer: string } => Boolean(item.answer));
+  if (events.length > 0 || periods.length > 0 || reflections.length > 0) {
     doc.addPage();
     let y = PAGE.margin + 4;
     const pageBottom = PAGE.height - PAGE.margin - 6;
@@ -120,6 +127,31 @@ export async function buildPdf(timeline: Timeline, t: TFunction, locale: string)
       y += 3;
       doc.setDrawColor(COLORS.rule).line(PAGE.margin, y, PAGE.width - PAGE.margin, y);
       y += 3;
+    }
+
+    if (reflections.length > 0) {
+      if (y + 25 > pageBottom) newPage();
+      y += 3;
+      doc.setFont('helvetica', 'bold').setFontSize(14).setTextColor(COLORS.primary);
+      doc.text(t('reflection.heading'), PAGE.margin, y);
+      y += 8;
+      const writeRows = (text: string, style: 'bold' | 'normal') => {
+        doc.setFont('helvetica', style).setFontSize(10).setTextColor(COLORS.text);
+        for (const row of doc.splitTextToSize(text, contentWidth) as string[]) {
+          if (y + 5 > pageBottom) {
+            newPage();
+            doc.setFont('helvetica', style).setFontSize(10).setTextColor(COLORS.text);
+          }
+          doc.text(row, PAGE.margin, y);
+          y += 5;
+        }
+      };
+      for (const { question, answer } of reflections) {
+        if (y + 12 > pageBottom) newPage();
+        writeRows(question, 'bold');
+        writeRows(answer, 'normal');
+        y += 3;
+      }
     }
     footer(doc, t);
   }

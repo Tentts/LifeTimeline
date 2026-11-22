@@ -28,7 +28,12 @@ export function EventList({ timeline, onEdit }: Props) {
   return (
     <ol className="event-list">
       {events.map((event) => (
-        <li key={event.id} className={`event-item valence-border-${Math.sign(event.valence)}`}>
+        <li
+          key={event.id}
+          className={`event-item valence-border-${Math.sign(event.valence)}${
+            event.isTurningPoint ? ' is-turning-point' : ''
+          }`}
+        >
           <div className="event-head">
             <span className="event-when">{when(timeline.person.birthDate, event)}</span>
             <span className={`valence-badge valence-${Math.sign(event.valence)}`}>

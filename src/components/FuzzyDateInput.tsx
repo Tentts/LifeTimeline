@@ -1,6 +1,8 @@
-import { useId } from 'react';
+import { useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import type { FuzzyDateFields } from './fuzzyDateFields';
+import { formatFuzzyDate } from '../model/fuzzyDate';
+import { CalendarPanel } from './CalendarPanel';
+import { fromFields, validateDateFields, type FuzzyDateFields } from './fuzzyDateFields';
 
 interface Props {
   legend: string;
@@ -11,6 +13,7 @@ interface Props {
   error?: string;
 }
 
+/** Date field: a button showing the date, which opens a calendar below it. */
 export function FuzzyDateInput({
   legend,
   value,
@@ -21,11 +24,15 @@ export function FuzzyDateInput({
 }: Props) {
   const { t, i18n } = useTranslation();
   const id = useId();
-  const monthName = (m: number) =>
-    new Intl.DateTimeFormat(i18n.resolvedLanguage, { month: 'long', timeZone: 'UTC' }).format(
-      new Date(Date.UTC(2000, m - 1, 1)),
-    );
-  const set = (patch: Partial<FuzzyDateFields>) => onChange({ ...value, ...patch });
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
+  const date = validateDateFields(value, false) === null ? fromFields(value) : undefined;
+  const text = date ? formatFuzzyDate(date, i18n.resolvedLanguage ?? 'en') : value.year;
+
+  const close = () => {
+    setOpen(false);
+    triggerRef.current?.focus();
+  };
 
   return (
     <fieldset className="fuzzy-date" aria-describedby={error ? `${id}-error` : undefined}>
@@ -34,57 +41,30 @@ export function FuzzyDateInput({
         {required && <span aria-hidden="true"> *</span>}
       </legend>
       <div className="fuzzy-date-fields">
-        <label>
-          <span>{t('date.year')}</span>
-          <input
-            type="number"
-            inputMode="numeric"
-            min={1850}
-            max={2200}
-            required={required}
-            value={value.year}
-            onChange={(e) => set({ year: e.target.value })}
-            className="input-year"
-          />
-        </label>
-        <label>
-          <span>{t('date.month')}</span>
-          <select
-            value={value.month}
-            onChange={(e) => set({ month: e.target.value, day: e.target.value ? value.day : '' })}
-          >
-            <option value="">{t('date.unknown')}</option>
-            {Array.from({ length: 12 }, (_, i) => (
-              <option key={i + 1} value={i + 1}>
-                {monthName(i + 1)}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          <span>{t('date.day')}</span>
-          <input
-            type="number"
-            inputMode="numeric"
-            min={1}
-            max={31}
-            disabled={!value.month}
-            value={value.day}
-            onChange={(e) => set({ day: e.target.value })}
-            className="input-day"
-          />
-        </label>
+        <button
+          ref={triggerRef}
+          type="button"
+          data-date-trigger
+          className={text ? 'date-trigger' : 'date-trigger empty'}
+          aria-expanded={open}
+          aria-label={`${legend}: ${text || t('date.select')}`}
+          onClick={() => setOpen((isOpen) => !isOpen)}
+        >
+          <span aria-hidden="true">📅</span>
+          <span>{text || t('date.select')}</span>
+        </button>
         {allowApprox && (
           <label className="checkbox">
             <input
               type="checkbox"
               checked={value.approx}
-              onChange={(e) => set({ approx: e.target.checked })}
+              onChange={(e) => onChange({ ...value, approx: e.target.checked })}
             />
             <span>{t('date.approx')}</span>
           </label>
         )}
       </div>
+      {open && <CalendarPanel value={value} onChange={onChange} onClose={close} />}
       {error && (
         <p id={`${id}-error`} className="field-error" role="alert">
           {error}

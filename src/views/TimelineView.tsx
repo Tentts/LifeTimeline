@@ -13,6 +13,7 @@ import { formatDateLabel } from '../components/useEventDateLabel';
 import { LifelineGraph } from '../graph/LifelineGraph';
 import { SCREEN_PALETTE } from '../graph/palette';
 import { emptyEventDraft, newId, type EventDraft } from '../model/factory';
+import { todayAsFuzzyDate } from '../model/fuzzyDate';
 import type { LifeEvent, Timeline } from '../model/schema';
 import { useTimelines } from '../state/TimelinesContext';
 import { CheckInDialog } from '../support/CheckInDialog';
@@ -190,7 +191,7 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
           initial={
             editing.mode === 'edit'
               ? withoutId(editing.event)
-              : (editing.initial ?? emptyEventDraft({ year: new Date().getFullYear() }))
+              : (editing.initial ?? emptyEventDraft(todayAsFuzzyDate()))
           }
           onCancel={() => setEditing(null)}
           onSubmit={saveEvent}

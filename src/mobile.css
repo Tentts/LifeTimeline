@@ -188,6 +188,39 @@
     width: 100%;
   }
 
+  /* ---------- Calendar ---------- */
+
+  button.date-trigger,
+  .calendar {
+    width: 100%;
+    max-width: none;
+  }
+
+  button.calendar-day {
+    min-height: 0;
+    font-size: 1rem;
+  }
+
+  button.calendar-arrow {
+    width: 44px;
+  }
+
+  .calendar-precision label {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .calendar-nav select,
+  .calendar-nav .input-year {
+    min-height: 44px;
+  }
+
+  .calendar-footer button {
+    flex: 1;
+  }
+
   /* ---------- Support ---------- */
 
   .crisis-actions a {

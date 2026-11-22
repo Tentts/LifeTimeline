@@ -4,6 +4,7 @@ import App from '../App';
 import i18n from '../i18n';
 import { createTimeline } from '../model/factory';
 import { deleteAllData, getTimeline, saveTimeline } from '../storage/db';
+import { dateTriggers, enterYear } from '../test/dates';
 import { loadProgress, saveProgress } from './stages';
 
 async function openTimeline(user: ReturnType<typeof userEvent.setup>, title: string) {
@@ -49,7 +50,7 @@ describe('guided walkthrough', () => {
 
     await user.click(screen.getByRole('button', { name: '+ Add an event from this time' }));
     const dialog = screen.getByRole('dialog', { name: 'Add an event' });
-    expect(within(dialog).getByLabelText('Year')).toHaveValue(1996);
+    expect(dateTriggers(dialog)[0]).toHaveTextContent('1996');
     await user.type(within(dialog).getByLabelText(/What happened/), 'First day of school');
     await user.click(within(dialog).getByRole('button', { name: 'Save' }));
 
@@ -85,9 +86,7 @@ describe('guided walkthrough', () => {
 
     await user.click(screen.getByRole('button', { name: 'Details' }));
     const dialog = screen.getByRole('dialog', { name: 'Timeline details' });
-    const year = within(dialog).getByLabelText('Year');
-    await user.clear(year);
-    await user.type(year, '2015');
+    await enterYear(user, dialog, '2015');
     await user.click(within(dialog).getByRole('button', { name: 'Save' }));
 
     expect(

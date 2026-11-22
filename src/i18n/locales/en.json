@@ -209,6 +209,71 @@
     "deleteTitle": "Delete this chapter?",
     "deleteBody": "“{{title}}” will be removed. The events from that time stay on your timeline."
   },
+  "example": {
+    "badge": "Example",
+    "title": "Alex’s life (example)",
+    "name": "Alex",
+    "see": "See an example",
+    "previewHeading": "What a Life Timeline looks like",
+    "previewBody": "This is the lifeline of Alex, a fictional person. Peaks are good times, valleys are hard ones, and the coloured bands are the chapters of Alex’s life.",
+    "explore": "Explore the example",
+    "back": "Back",
+    "notice": "Alex is fictional. This example is built into the app, and nothing here is saved unless you make a copy.",
+    "createOwn": "Create my own timeline",
+    "copy": "Make an editable copy",
+    "chapters": {
+      "growing": "Growing up",
+      "university": "University",
+      "career": "First career",
+      "over": "Starting over"
+    },
+    "events": {
+      "sister": {
+        "title": "Little sister was born",
+        "description": "Suddenly there was someone to look after and play with."
+      },
+      "school": {
+        "title": "Started school",
+        "description": "Nervous at first, then made a best friend in the first week."
+      },
+      "move": {
+        "title": "Family moved to a new city",
+        "description": "Leaving friends behind was hard, and it took a long time to feel at home."
+      },
+      "band": {
+        "title": "Joined a band",
+        "description": "Music became a way to meet people and feel like myself."
+      },
+      "grandfather": {
+        "title": "Grandfather passed away",
+        "description": "He taught me to fish and always listened. I still miss him."
+      },
+      "university": {
+        "title": "Left home for university",
+        "description": "The first time making my own decisions. Everything opened up."
+      },
+      "job": {
+        "title": "First full-time job",
+        "description": "Proud of the independence, even when the hours were long."
+      },
+      "burnout": {
+        "title": "Burnout and time off work",
+        "description": "I had to stop. Asking for help was the hardest and best thing I did."
+      },
+      "career": {
+        "title": "Changed careers",
+        "description": "Retrained as a teacher and found work that feels meaningful."
+      },
+      "home": {
+        "title": "Moved in with my partner",
+        "description": "A place that finally feels like home."
+      }
+    },
+    "answers": {
+      "themes": "Every time something ended, I eventually found something that fit me better.",
+      "strengths": "My sister, music, and learning to ask for help."
+    }
+  },
   "support": {
     "footerLink": "Need support?",
     "title": "Find support",

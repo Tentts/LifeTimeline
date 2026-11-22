@@ -8,7 +8,8 @@ import { formatValence, valenceKey } from './valence';
 interface Props {
   timeline: Timeline;
   width: number;
-  onEdit: (id: string) => void;
+  /** Omit for a read-only graph. */
+  onEdit?: (id: string) => void;
 }
 
 /** Phone only: compact graph plus a card for the tapped event. */
@@ -40,9 +41,11 @@ export function CompactGraphSection({ timeline, width, onEdit }: Props) {
           <p className="selected-event-title">{selected.title}</p>
           {selected.description && <p className="selected-event-text">{selected.description}</p>}
           <div className="actions">
-            <button type="button" onClick={() => onEdit(selected.id)}>
-              {t('common.edit')}
-            </button>
+            {onEdit && (
+              <button type="button" onClick={() => onEdit(selected.id)}>
+                {t('common.edit')}
+              </button>
+            )}
             <button type="button" className="secondary" onClick={() => setSelectedId(null)}>
               {t('common.close')}
             </button>

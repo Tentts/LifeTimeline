@@ -678,6 +678,21 @@ input[aria-invalid='true'] {
   outline-offset: 2px;
 }
 
+/* ---------- About ---------- */
+
+.about h2 {
+  margin: 0.4rem 0 0.5rem;
+}
+
+.about h3 {
+  margin: 1.25rem 0 0.25rem;
+}
+
+.about-link {
+  display: inline-block;
+  font-weight: 700;
+}
+
 /* ---------- Example timeline ---------- */
 
 .example-badge {

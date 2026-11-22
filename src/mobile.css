@@ -188,6 +188,14 @@
     width: 100%;
   }
 
+  /* ---------- About ---------- */
+
+  .about-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
   /* ---------- Calendar ---------- */
 
   button.date-trigger,

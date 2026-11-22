@@ -40,6 +40,8 @@ export function CompactLifelineGraph({ timeline, width, selectedId, onSelect, no
     margins: COMPACT_MARGINS,
     maxTicks: Math.max(2, Math.floor(plotWidth / 60)),
     ribbonHeight: 16,
+    labels: false,
+    laneHeight: 28,
   });
   const { height, plot } = layout;
   const colorFor = (valence: number) =>

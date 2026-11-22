@@ -4,7 +4,7 @@
  */
 import i18n from '../i18n';
 import { baseFileName, serializeTimeline, TL_EXTENSION } from '../format/tl';
-import { GRAPH_HEIGHT, GRAPH_WIDTH } from '../graph/layout';
+import { computeLayout, GRAPH_WIDTH } from '../graph/layout';
 import type { Timeline } from '../model/schema';
 import { downloadBlob } from './download';
 
@@ -17,8 +17,11 @@ export function exportTl(timeline: Timeline): void {
 
 export async function exportPng(timeline: Timeline, scale = 2): Promise<void> {
   const { renderGraphSvg } = await import('./graphSvg');
-  const svg = renderGraphSvg(timeline);
-  const blob = await svgToPng(svg, GRAPH_WIDTH, GRAPH_HEIGHT, scale);
+  const now = new Date();
+  const svg = renderGraphSvg(timeline, now);
+  // Crowded timelines are taller than the default graph.
+  const { height } = computeLayout(timeline, { now });
+  const blob = await svgToPng(svg, GRAPH_WIDTH, height, scale);
   downloadBlob(blob, `${baseFileName(timeline.title)}.png`);
 }
 

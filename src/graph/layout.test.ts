@@ -33,6 +33,91 @@ describe('lifeline layout', () => {
     expect(tick2000?.age).toBe(10);
   });
 
+  describe('chapter bands', () => {
+    const withPeriods = (
+      periods: { id: string; from: number; to?: number }[],
+    ): typeof timeline => ({
+      ...timeline,
+      periods: periods.map(({ id, from, to }) => ({
+        id,
+        name: id,
+        start: { year: from },
+        end: to === undefined ? undefined : { year: to },
+      })),
+    });
+
+    it('draws nothing and keeps the plot unchanged without chapters', () => {
+      const layout = computeLayout(timeline, { now });
+      expect(layout.bands).toEqual([]);
+      expect(layout.ribbonBottom).toBe(0);
+      expect(layout.plot.top).toBe(40);
+    });
+
+    it('puts chapters that do not overlap in one ribbon row', () => {
+      const layout = computeLayout(
+        withPeriods([
+          { id: 'school', from: 1996, to: 2007 },
+          { id: 'uni', from: 2008, to: 2012 },
+        ]),
+        { now },
+      );
+      expect(layout.bands.map((b) => b.ribbonY)).toEqual([0, 0]);
+      expect(layout.ribbonBottom).toBe(17);
+      expect(layout.plot.top).toBe(57);
+      expect(layout.bands[0].x + layout.bands[0].width).toBeCloseTo(layout.bands[1].x);
+    });
+
+    it('gives overlapping chapters separate rows, always at full graph height', () => {
+      const layout = computeLayout(
+        withPeriods([
+          { id: 'uni', from: 2008, to: 2012 },
+          { id: 'job', from: 2011, to: 2015 },
+          { id: 'later', from: 2020, to: 2021 },
+        ]),
+        { now },
+      );
+      const fullHeight = layout.plot.bottom - layout.plot.top;
+      const [uni, job, later] = layout.bands;
+      expect([uni.ribbonY, job.ribbonY, later.ribbonY]).toEqual([0, 17, 0]);
+      expect(layout.ribbonBottom).toBe(34);
+      for (const band of layout.bands) {
+        expect(band.y).toBe(layout.plot.top);
+        expect(band.height).toBe(fullHeight);
+      }
+    });
+
+    it('keeps event labels clear of the ribbons', () => {
+      const layout = computeLayout(
+        {
+          ...withPeriods([{ id: 'uni', from: 1995, to: 2012 }]),
+          events: [
+            { id: 'top', title: 'Top', start: { year: 2000 }, valence: 5, tags: [], people: [] },
+          ],
+        },
+        { now },
+      );
+      expect(layout.events[0].label.y).toBeGreaterThan(layout.ribbonBottom);
+    });
+
+    it('clips chapters to the visible years and runs ongoing ones to today', () => {
+      const layout = computeLayout(
+        withPeriods([
+          { id: 'early', from: 1980, to: 1995 },
+          { id: 'now', from: 2020 },
+        ]),
+        { now },
+      );
+      expect(layout.bands[0].x).toBe(layout.plot.left);
+      const ongoing = layout.bands[1];
+      expect(ongoing.x + ongoing.width).toBeLessThan(layout.plot.right);
+    });
+
+    it('leaves out chapters entirely before birth', () => {
+      const layout = computeLayout(withPeriods([{ id: 'old', from: 1950, to: 1960 }]), { now });
+      expect(layout.bands).toEqual([]);
+    });
+  });
+
   it('keeps everything inside the drawing area', () => {
     const layout = computeLayout(timeline, { now });
     for (const e of layout.events) {

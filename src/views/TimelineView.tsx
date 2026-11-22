@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { ChaptersSection } from '../components/ChaptersSection';
 import { CompactGraphSection } from '../components/CompactGraphSection';
 import { ConfirmDialog } from '../components/ConfirmDialog';
 import { COMPACT_BREAKPOINT } from '../graph/CompactLifelineGraph';
@@ -124,6 +125,8 @@ export function TimelineView({ timeline }: { timeline: Timeline }) {
         </div>
         <p className="hint">{t('timeline.savedLocally')}</p>
       </section>
+
+      <ChaptersSection timeline={timeline} />
 
       <section className="card">
         <h3>{t('timeline.eventsHeading')}</h3>

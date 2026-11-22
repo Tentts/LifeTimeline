@@ -165,6 +165,36 @@
     "emptyShort": "Add your first event to start.",
     "tapHint": "Tap a point on the line to see that event."
   },
+  "chapters": {
+    "heading": "Chapters",
+    "add": "Add chapter",
+    "empty": "If your life were a book, what would its chapters be? Add periods like “University years” or “Living abroad” to see them on your lifeline.",
+    "createTitle": "Add a chapter",
+    "editTitle": "Edit chapter",
+    "hint": "A chapter is a period of your life that belongs together. Chapters can overlap.",
+    "name": "Chapter name",
+    "namePlaceholder": "e.g. University years",
+    "nameRequired": "Please give this chapter a name.",
+    "start": "From",
+    "end": "Until",
+    "ongoing": "This chapter is still going on",
+    "today": "today",
+    "color": "Colour",
+    "colors": {
+      "pink": "Pink",
+      "blue": "Blue",
+      "violet": "Violet",
+      "teal": "Teal",
+      "amber": "Amber",
+      "slate": "Slate"
+    },
+    "errors": {
+      "endBeforeStart": "A chapter can’t end before it starts.",
+      "beforeBirth": "This chapter ends before your date of birth."
+    },
+    "deleteTitle": "Delete this chapter?",
+    "deleteBody": "“{{title}}” will be removed. The events from that time stay on your timeline."
+  },
   "wizard": {
     "title": "Guided walkthrough",
     "startButton": "Guided walkthrough",

@@ -165,6 +165,36 @@
     "emptyShort": "Añade tu primer acontecimiento para empezar.",
     "tapHint": "Toca un punto de la línea para ver ese acontecimiento."
   },
+  "chapters": {
+    "heading": "Capítulos",
+    "add": "Añadir capítulo",
+    "empty": "Si tu vida fuera un libro, ¿cuáles serían sus capítulos? Añade etapas como «Años de universidad» o «Viviendo en el extranjero» para verlas en tu línea de vida.",
+    "createTitle": "Añadir un capítulo",
+    "editTitle": "Editar capítulo",
+    "hint": "Un capítulo es una etapa de tu vida con unidad propia. Los capítulos pueden solaparse.",
+    "name": "Nombre del capítulo",
+    "namePlaceholder": "p. ej. Años de universidad",
+    "nameRequired": "Ponle un nombre a este capítulo.",
+    "start": "Desde",
+    "end": "Hasta",
+    "ongoing": "Este capítulo sigue abierto",
+    "today": "hoy",
+    "color": "Color",
+    "colors": {
+      "pink": "Rosa",
+      "blue": "Azul",
+      "violet": "Violeta",
+      "teal": "Verde azulado",
+      "amber": "Ámbar",
+      "slate": "Gris pizarra"
+    },
+    "errors": {
+      "endBeforeStart": "Un capítulo no puede terminar antes de empezar.",
+      "beforeBirth": "Este capítulo termina antes de tu fecha de nacimiento."
+    },
+    "deleteTitle": "¿Eliminar este capítulo?",
+    "deleteBody": "«{{title}}» se eliminará. Los acontecimientos de esa época seguirán en tu línea de vida."
+  },
   "wizard": {
     "title": "Recorrido guiado",
     "startButton": "Recorrido guiado",

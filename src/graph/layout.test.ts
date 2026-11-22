@@ -118,6 +118,80 @@ describe('lifeline layout', () => {
     });
   });
 
+  describe('crowded levels', () => {
+    const item = (id: string, from: number, to?: number, valence = 3) => ({
+      id,
+      title: `Long event title ${id}`,
+      start: { year: from },
+      end: to === undefined ? undefined : { year: to },
+      valence,
+      tags: [],
+      people: [],
+    });
+    const crowded = {
+      ...timeline,
+      events: [
+        item('long', 2000, 2012),
+        item('during', 2004),
+        item('also', 2008, 2011),
+        item('after', 2020),
+      ],
+    };
+
+    it('keeps the default height when nothing collides', () => {
+      expect(computeLayout(timeline, { now }).height).toBe(440);
+    });
+
+    it('stacks items whose time spans overlap and grows the graph', () => {
+      const layout = computeLayout(crowded, { now });
+      const byId = new Map(layout.events.map((e) => [e.event.id, e]));
+      expect(new Set(['long', 'during', 'also'].map((id) => byId.get(id)?.y)).size).toBe(3);
+      expect(layout.height).toBeGreaterThan(440);
+      expect(layout.yTicks.map((tick) => tick.value)).toContain(3);
+    });
+
+    it('never overlaps two titles', () => {
+      const layout = computeLayout(crowded, { now });
+      const boxes = layout.events.map((e) => {
+        const width = e.event.title.length * 6.2;
+        return { left: e.label.x - width / 2, right: e.label.x + width / 2, y: e.label.y };
+      });
+      boxes.forEach((a, i) =>
+        boxes.slice(i + 1).forEach((b) => {
+          const sameLine = Math.abs(a.y - b.y) < 13;
+          const sideBySide = a.left < b.right && b.left < a.right;
+          expect(sameLine && sideBySide).toBe(false);
+        }),
+      );
+    });
+
+    it('keeps a stacked level between its neighbours', () => {
+      const layout = computeLayout(
+        {
+          ...crowded,
+          events: [
+            ...crowded.events,
+            item('up', 2005, undefined, 4),
+            item('down', 2005, undefined, 2),
+          ],
+        },
+        { now },
+      );
+      const ys = (valence: number) =>
+        layout.events.filter((e) => e.event.valence === valence).map((e) => e.y);
+      expect(Math.max(...ys(4))).toBeLessThan(Math.min(...ys(3)));
+      expect(Math.max(...ys(3))).toBeLessThan(Math.min(...ys(2)));
+    });
+
+    it('needs less room on phones, where titles are hidden', () => {
+      const options = { now, width: 360, height: 300, labels: false, laneHeight: 28 };
+      const layout = computeLayout(crowded, options);
+      const placed = layout.events.filter((e) => ['long', 'during'].includes(e.event.id));
+      expect(placed[0].y).not.toBe(placed[1].y);
+      expect(layout.height).toBeLessThan(computeLayout(crowded, { now }).height);
+    });
+  });
+
   it('keeps everything inside the drawing area', () => {
     const layout = computeLayout(timeline, { now });
     for (const e of layout.events) {

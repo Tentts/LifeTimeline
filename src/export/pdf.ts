@@ -7,7 +7,7 @@ import {
   formatPeriodRange,
 } from '../components/useEventDateLabel';
 import { formatValence, valenceKey } from '../components/valence';
-import { GRAPH_HEIGHT, GRAPH_WIDTH } from '../graph/layout';
+import { computeLayout, GRAPH_WIDTH } from '../graph/layout';
 import { sortEvents } from '../model/factory';
 import { chapterColor, sortPeriods } from '../model/periods';
 import { REFLECTION_QUESTIONS, type Timeline } from '../model/schema';
@@ -25,8 +25,22 @@ export async function buildPdf(timeline: Timeline, t: TFunction, locale: string)
 
   // Page 1: header and graph
   header(doc, timeline, t, locale);
-  const graphHeight = (contentWidth * GRAPH_HEIGHT) / GRAPH_WIDTH;
-  await drawSvg(doc, renderGraphSvg(timeline), PAGE.margin, 34, contentWidth, graphHeight);
+  // Crowded timelines are taller: shrink them to fit the page and keep them centred.
+  const now = new Date();
+  const { height: svgHeight } = computeLayout(timeline, { now });
+  const graphTop = 34;
+  const maxGraphHeight = PAGE.height - PAGE.margin - 6 - graphTop;
+  const scale = Math.min(contentWidth / GRAPH_WIDTH, maxGraphHeight / svgHeight);
+  const graphWidth = GRAPH_WIDTH * scale;
+  const graphX = PAGE.margin + (contentWidth - graphWidth) / 2;
+  await drawSvg(
+    doc,
+    renderGraphSvg(timeline, now),
+    graphX,
+    graphTop,
+    graphWidth,
+    svgHeight * scale,
+  );
   footer(doc, t);
 
   // Following pages: chapters, then events

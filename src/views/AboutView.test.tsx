@@ -19,6 +19,8 @@ describe('About page', () => {
     const link = screen.getByRole('link', { name: 'Tentts on GitHub' });
     expect(link).toHaveAttribute('href', 'https://github.com/Tentts');
     expect(link).toHaveAttribute('rel', 'noopener noreferrer');
+    // The avatar must be bundled: the CSP blocks images from other hosts.
+    expect(link.querySelector('img')?.getAttribute('src')).toMatch(/^\/(.*\/)?tentts-avatar\.png$/);
 
     await user.click(screen.getByRole('button', { name: '← Back' }));
     expect(screen.queryByRole('heading', { name: 'About Life Timeline' })).toBeNull();

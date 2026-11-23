@@ -478,8 +478,7 @@
   "pdf": {
     "eventsHeading": "Acontecimientos",
     "born": "nacimiento: {{date}}",
-    "exported": "exportado el {{date}}",
-    "footer": "Línea de Vida · una herramienta de autorreflexión, no de terapia"
+    "exported": "exportado el {{date}}"
   },
   "footer": {
     "privacy": "Tus datos se quedan en este navegador. No se envía nada a ningún servidor.",

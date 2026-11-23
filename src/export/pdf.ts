@@ -187,7 +187,7 @@ function header(doc: jsPDF, timeline: Timeline, t: TFunction, locale: string) {
 
 function footer(doc: jsPDF, t: TFunction) {
   doc.setFont('helvetica', 'normal').setFontSize(8).setTextColor(COLORS.muted);
-  doc.text(t('pdf.footer'), PAGE.margin, PAGE.height - 7);
+  doc.text(t('app.title'), PAGE.margin, PAGE.height - 7);
   doc.text(String(doc.getNumberOfPages()), PAGE.width - PAGE.margin, PAGE.height - 7, {
     align: 'right',
   });

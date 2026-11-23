@@ -7,13 +7,15 @@ import {
   formatPeriodRange,
 } from '../components/useEventDateLabel';
 import { formatValence, valenceKey } from '../components/valence';
-import { computeLayout, GRAPH_WIDTH } from '../graph/layout';
+import { fitGraphSize } from '../graph/layout';
 import { sortEvents } from '../model/factory';
 import { chapterColor, sortPeriods } from '../model/periods';
 import { REFLECTION_QUESTIONS, type Timeline } from '../model/schema';
 import { renderGraphSvg } from './graphSvg';
 
 const PAGE = { width: 297, height: 210, margin: 14 }; // A4 landscape, mm
+const GRAPH_TOP = 29; // just below the header
+const GRAPH_BOTTOM_GAP = 11; // keeps the footer clear
 // Light-theme colours (see theme.css): blue headings, pink accents.
 const COLORS = { text: '#1e2233', muted: '#5b6075', primary: '#2f5fc4', rule: '#e8e5f0' };
 
@@ -25,21 +27,17 @@ export async function buildPdf(timeline: Timeline, t: TFunction, locale: string)
 
   // Page 1: header and graph
   header(doc, timeline, t, locale);
-  // Crowded timelines are taller: shrink them to fit the page and keep them centred.
+  // The chart is laid out for the page, so it uses all the space between header and footer.
   const now = new Date();
-  const { height: svgHeight } = computeLayout(timeline, { now });
-  const graphTop = 34;
-  const maxGraphHeight = PAGE.height - PAGE.margin - 6 - graphTop;
-  const scale = Math.min(contentWidth / GRAPH_WIDTH, maxGraphHeight / svgHeight);
-  const graphWidth = GRAPH_WIDTH * scale;
-  const graphX = PAGE.margin + (contentWidth - graphWidth) / 2;
+  const graphHeight = PAGE.height - GRAPH_TOP - GRAPH_BOTTOM_GAP;
+  const size = fitGraphSize(timeline, contentWidth / graphHeight, now);
   await drawSvg(
     doc,
-    renderGraphSvg(timeline, now),
-    graphX,
-    graphTop,
-    graphWidth,
-    svgHeight * scale,
+    renderGraphSvg(timeline, now, size),
+    PAGE.margin,
+    GRAPH_TOP,
+    contentWidth,
+    graphHeight,
   );
   footer(doc, t);
 
@@ -189,7 +187,7 @@ function header(doc: jsPDF, timeline: Timeline, t: TFunction, locale: string) {
 
 function footer(doc: jsPDF, t: TFunction) {
   doc.setFont('helvetica', 'normal').setFontSize(8).setTextColor(COLORS.muted);
-  doc.text(t('pdf.footer'), PAGE.margin, PAGE.height - 7);
+  doc.text(t('app.title'), PAGE.margin, PAGE.height - 7);
   doc.text(String(doc.getNumberOfPages()), PAGE.width - PAGE.margin, PAGE.height - 7, {
     align: 'right',
   });

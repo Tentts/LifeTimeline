@@ -11,6 +11,8 @@ import {
 
 export const GRAPH_WIDTH = 1000;
 export const GRAPH_HEIGHT = 440;
+/** Starting width for page-fitted exports: more room for titles, still readable in print. */
+const FITTED_GRAPH_WIDTH = 1200;
 const DEFAULT_RIBBON_HEIGHT = 17;
 
 export interface GraphMargins {
@@ -70,6 +72,7 @@ const LABEL_OFFSET = 14;
 const MARKER_RADIUS = 12;
 const LANE_GAP = 6;
 const DEFAULT_LANE_HEIGHT = 36;
+const MAX_FITTED_ROW_HEIGHT = 56;
 /** Keeps levels far enough apart for one row of marker and label each. */
 const MIN_LABELLED_PLOT_HEIGHT = 356;
 
@@ -145,6 +148,8 @@ export function computeLayout(
     labels?: boolean;
     /** Height of each extra row in a crowded level. */
     laneHeight?: number;
+    /** Extra rows use the free space in `height` first; it grows only if they do not fit. */
+    fitHeight?: boolean;
   } = {},
 ): GraphLayout {
   const width = options.width ?? GRAPH_WIDTH;
@@ -198,10 +203,19 @@ export function computeLayout(
 
   // Crowded levels get extra height; the rest of the scale keeps its spacing.
   const levels = Array.from({ length: MAX_VALENCE - MIN_VALENCE + 1 }, (_, i) => MIN_VALENCE + i);
-  const extraFor = (valence: number) => (laneCount(valence) - 1) * laneHeight;
-  const totalExtra = levels.reduce((sum, level) => sum + extraFor(level), 0);
   const minPlotHeight = showLabels ? MIN_LABELLED_PLOT_HEIGHT : 0;
-  const height = Math.max(baseHeight, m.top + ribbonBottom + minPlotHeight + m.bottom) + totalExtra;
+  const minHeight = m.top + ribbonBottom + minPlotHeight + m.bottom;
+  const extraRows = levels.reduce((sum, level) => sum + laneCount(level) - 1, 0);
+  // When fitting a page, crowded levels may spread their rows into the spare height.
+  const rowHeight =
+    options.fitHeight && extraRows > 0
+      ? Math.max(laneHeight, Math.min(MAX_FITTED_ROW_HEIGHT, (baseHeight - minHeight) / extraRows))
+      : laneHeight;
+  const extraFor = (valence: number) => (laneCount(valence) - 1) * rowHeight;
+  const totalExtra = extraRows * rowHeight;
+  const height = options.fitHeight
+    ? Math.max(baseHeight, minHeight + totalExtra)
+    : Math.max(baseHeight, minHeight) + totalExtra;
 
   const plot = {
     left: plotLeft,
@@ -242,7 +256,7 @@ export function computeLayout(
 
   const positioned = horizontal.map((h) => {
     const lane = lanes.get(h.event.id) ?? 0;
-    const py = y(h.event.valence) + (lane - (laneCount(h.event.valence) - 1) / 2) * laneHeight;
+    const py = y(h.event.valence) + (lane - (laneCount(h.event.valence) - 1) / 2) * rowHeight;
     return { ...h, py };
   });
 
@@ -305,4 +319,18 @@ export function computeLayout(
   }));
 
   return { width, height, plot, xTicks, yTicks, birth, events, path, bands, ribbonBottom };
+}
+
+/**
+ * Drawing size that exactly fills an area of the given aspect ratio (width / height).
+ * A very crowded timeline gets a wider drawing, which also spreads its items apart.
+ */
+export function fitGraphSize(timeline: Timeline, aspect: number, now?: Date) {
+  let width = FITTED_GRAPH_WIDTH;
+  for (;;) {
+    const height = Math.round(width / aspect);
+    const needed = computeLayout(timeline, { now, width, height, fitHeight: true }).height;
+    if (needed <= height) return { width, height };
+    width = Math.ceil(needed * aspect);
+  }
 }

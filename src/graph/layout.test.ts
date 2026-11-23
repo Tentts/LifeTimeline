@@ -1,5 +1,5 @@
 import { createTimeline } from '../model/factory';
-import { computeLayout } from './layout';
+import { computeLayout, fitGraphSize } from './layout';
 
 const now = new Date('2026-11-22T12:00:00Z');
 
@@ -189,6 +189,41 @@ describe('lifeline layout', () => {
       const placed = layout.events.filter((e) => ['long', 'during'].includes(e.event.id));
       expect(placed[0].y).not.toBe(placed[1].y);
       expect(layout.height).toBeLessThan(computeLayout(crowded, { now }).height);
+    });
+  });
+
+  describe('page-fitted graph', () => {
+    const many = (count: number) => ({
+      ...timeline,
+      events: Array.from({ length: count }, (_, i) => ({
+        id: `e${i}`,
+        title: `A fairly long event title ${i}`,
+        start: { year: 2000 },
+        end: { year: 2020 },
+        valence: 3,
+        tags: [],
+        people: [],
+      })),
+    });
+
+    it('fills the area exactly when there is room', () => {
+      const size = fitGraphSize(timeline, 1.6, now);
+      expect(size).toEqual({ width: 1200, height: 750 });
+      expect(computeLayout(timeline, { now, ...size, fitHeight: true }).height).toBe(750);
+    });
+
+    it('uses free page height for extra rows', () => {
+      const size = fitGraphSize(many(5), 1.6, now);
+      expect(size.width).toBe(1200);
+      expect(computeLayout(many(5), { now, ...size, fitHeight: true }).height).toBe(size.height);
+    });
+
+    it('keeps the page shape for very crowded timelines', () => {
+      const size = fitGraphSize(many(40), 1.6, now);
+      expect(size.width).toBeGreaterThan(1200);
+      expect(size.width / size.height).toBeCloseTo(1.6, 2);
+      const layout = computeLayout(many(40), { now, ...size, fitHeight: true });
+      expect(layout.height).toBeLessThanOrEqual(size.height);
     });
   });
 

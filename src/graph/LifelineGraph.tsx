@@ -49,6 +49,8 @@ interface Props {
   onSelectEvent?: (id: string) => void;
   /** Keeps SVG ids unique when the on-screen and export graphs exist at the same time. */
   idPrefix?: string;
+  /** Draws for a specific area (the PDF page) instead of the default graph size. */
+  fitTo?: { width: number; height: number };
 }
 
 /**
@@ -62,9 +64,10 @@ export function LifelineGraph({
   now,
   onSelectEvent,
   idPrefix = 'lifeline',
+  fitTo,
 }: Props) {
   const { t } = useTranslation();
-  const layout = computeLayout(timeline, { now });
+  const layout = computeLayout(timeline, fitTo ? { now, ...fitTo, fitHeight: true } : { now });
   const { width, height, plot } = layout;
   const gradientId = `${idPrefix}-line-gradient`;
 

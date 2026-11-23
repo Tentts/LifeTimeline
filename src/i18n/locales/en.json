@@ -478,8 +478,7 @@
   "pdf": {
     "eventsHeading": "Events",
     "born": "born {{date}}",
-    "exported": "exported {{date}}",
-    "footer": "Life Timeline · a self-reflection tool, not therapy"
+    "exported": "exported {{date}}"
   },
   "footer": {
     "privacy": "Your data stays in this browser. Nothing is sent to any server.",
